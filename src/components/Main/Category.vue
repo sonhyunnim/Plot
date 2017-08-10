@@ -25,11 +25,7 @@
 <script>
 export default {
   computed: {
-    dateChange: {
-      function(index) {
-      return this.cg_lists[index].heading
-    }
-    }
+    
   },
   data() {
     return {
