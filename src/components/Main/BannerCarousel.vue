@@ -1,161 +1,146 @@
 <template>
-  <div class="main-banner">
-    <div class="music-player">
-      <ul class="music-coverlist is-list">
-        <li class="music-cover-item main-banner">
-            <img class="banner music-cover is-rwd" src="../../assets/images/main_banner01.png" >
-        </li>
-      </ul>
-      <div class="player-indicators">
-        <a href role="tab" class="indicator is-active" aria-label=""></a>
-        <a href role="tab" class="indicator" aria-label=""></a>
-        <a href role="tab" class="indicator" aria-label=""></a>
-        <a href role="tab" class="indicator" aria-label=""></a>
-        <a href role="tab" class="indicator" aria-label=""></a>
+  <div class="carousel">
+     <slot></slot>
+      <div class="information" >
+      <h2>1</h2>
+      <h3>라이프 사진전</h3>
+      <div class="text-sub">
+      예술의 전당<br>
+      한가람 미술관<br>
+      2017.7.7 - 2017.10.8
       </div>
-      <div class="player-controller">
-        <button type="button" class="button is-button is-prev" aria-label="PREV"></button>
-        <button type="button" class="button is-button is-next" aria-label="NEXT"></button>
-      </div>
+      <button type="button" class="carousel-button is-prev" @click="prevItem">
+        <img src="https:icon.now.sh/chevron/13/rgb(30, 11, 101)/left" alt="prev item">
+      </button>
+      <button type="button" class="carousel-button is-next" @click="nextItem">
+        <img src="https:icon.now.sh/chevron/13/rgb(30, 11, 101)/right" alt="next item">
+      </button>
+      <div class="indicators">
+        <a href="" role="tab" @click.prevent="gotoItem(n-1)" v-for="n in items_count" :class="{'is-active':active_index === n-1}">
+          <img :src="activeIndexSrc(n-1)" :alt="activeIndexAlt(n-1)">
+        </a>
+      </div> 
     </div>
   </div>
 </template>
 <script>
-
 export default {
-  data() {
-     return {
-     coverList : [
-  {
-    src: "001.EdSheeran-ShapeOfYou.jpg",
-    alt: "Ed Sheeran - Shape Of You"
-  },
-  {
-    src: "002.TheChainsmokers&Halsey-Closer.jpg",
-    alt: "The Chainsmokers & Halsey - Closer"
-  },
-  {
-    src: "003.Zayn&TaylorSwift-IDon'tWannaLiveForever(FiftyShadesDarker).jpg",
-    alt: "Zayn & TaylorSwift - I Don't Wanna Live Forever (Fifty Shades Darker)"
-  },
-  {
-    src: "004.KatyPerry&SkipMarley-ChainedToTheRhythm.jpg",
-    alt: "Katy Perry & Skip Marley - Chained To The Rhythm"
-  },
-  {
-    src: "005.Migos&LilUziVert-BadAndBoujee.jpg",
-    alt: "Migos & Lil Uzi Vert - Bad And Boujee"
-  },
-  {
-    src: "006.TheChainsmokers-Paris.jpg",
-    alt: "The Chainsmokers - Paris"
-  },
-  {
-    src: "007.Rihanna-LoveOnTheBrain.jpg",
-    alt: "Rihanna - Love On The Brain"
-  },
-  {
-    src: "008.BrunoMars-That'sWhatILike.jpg",
-    alt: "Bruno Mars - That's What I Like"
-  },
-  {
-    src: "009.BigSean-BounceBack.jpg",
-    alt: "Big Sean - Bounce Back"
-  },
-  {
-    src: "010.MachineGunKelly&CamilaCabello-BadThings.jpg",
-    alt: "Machine Gun Kelly & Camila Cabello - Bad Things"
-  }
-]
-
+  name: 'Carousel',
+  props:{
+    index: {
+      type: Number,
+      default : 0
     }
   },
-  
+  // 각각의 아이템에 인덱스 설정.
+  mounted() {
+    this.items.forEach((item,i)=> item.index = i);
+    //이미지 로딩, 리사이즈 상태에 따른 컴포넌트 높이 조절
+    // let setHeight = () => this.$el.style.height = this.items[0].$el.getBindingClientRect().height + 'px';
+    // window.addEventListener('DOMContentLoaded', setHeight)
+    // window.addEventListener('resize', setHeight)
+  },
+  data(){
+     return {
+       active_index: this.index,
+       items: this.$children 
+     }
+  },
+  computed: {
+    items_count(){
+      return this.items.length;
+    }
+  },
+  methods: {
+    activeIndexSrc(n){
+      let path = this.active_index === n ? 'lens' : 'panorama_fish_eye';
+    return `https://icon.now.sh/${path}/10/rgb(30, 11, 101)`;
+    },
+    activeIndexAlt(n){
+      let message = this.active_index === n ? 'Current Item' + n : 'Item' + n;
+      return message;
+    },
+    prevItem(){
+      // console.log('prev item');
+      if( --this.active_index < 0) {
+        this.active_index = this.items_count - 1;
+        }
+    },
+    nextItem(){
+      // console.log('next item');
+      if( ++this.active_index >= this.items_count) {
+        this.active_index = 0;
+      }
+    },
+    gotoItem(n){
+      this.active_index = n;
+    }
+  }
 }
 </script>
 <style lang="sass" scoped>
   @import "~config"
-  .main-banner
+  .carousel
     background: black
     width: 100%
-    
-  .is-list 
-    margin-top: 0
-    margin-bottom: 0
-    padding-left: 0
-    list-style: none
-  .is-rwd 
-    width: 100%
-    height: auto
-  .is-button 
-    border: none
-    background: none
-  .music-player 
     position: relative
-    overflow: hidden
-    padding-top: 35%
+    padding-bottom: 35%
+
     
-  .banner
-    background-size: cover
-  .music-cover
+  .information
+      background-color: rgb(255, 255, 255)
+      opacity: 0.8
+      position: absolute
+      left: 65%
+      top: 40%
+      width: 23%
+      height: 60%
+      z-index: 108
+      text-align: right
+      
+      padding: 20px
+  
+
+  h2
+    text-align: left
+    font-size: 20px
+  h3
+    padding-top: 10px
+    border-top: 1px solid rgb(30, 11, 101)      
+    font-size: 25px
+    color: rgb(34, 34, 34)
+    font-weight: bold
+    line-height: 1.2
+  .text-sub
+    padding-top: 15%
+    font-size: 12px;  
+  .carousel-button
     position: absolute
-    width: 80%
-    height: auto
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-  .music-coverlist 
-    // display: flex
-    // transform: translateX(0px)
-    // transition: all 0.4s cubic-bezier(0.92, 0, 0.49, 0.47)
-  .music-cover-item 
-    flex: 1 0 400px
-  .player-controller 
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-  .player-controller .button 
-    opacity: 0.85
-    position: absolute
-    top: 50%
-    width: 24px
-    height: 40px
-    // background: url("../images/icon-arrow-prev-next-bw.png") no-repeat
-    background-size: 48px 80px
+    bottom: 5%
+    border: none
+    opacity: 1
+    background-color: #fff
+    transition: opacity 0.4s
     transform: translateY(-50%)
-    transition: all 0.4s
-  .player-controller .is-prev 
-    left: 10px
-    background-position: 0 100%
-
-  .player-controller .is-next 
-    right: 10px
-    background-position: 100% 100%
-
-  .player-indicators 
+    &.is-prev
+      left: 20px
+    &.is-next
+      right: 20px  
+  .indicators
     position: absolute
-    z-index: 100
-    bottom: 20px
     left: 50%
+    bottom: 10%
     transform: translateX(-50%)
-  .indicator.is-active 
-    opacity: 1
-    background: rgb(255, 255, 255)
-    transform: scale(1.6)
-  .indicator 
-    opacity: 1
-    cursor: pointer
-    display: inline-block
-    width: 10px
-    height: 10px
-    background: #fff
-    border-radius: 50%
-    margin-left: 5px
-    margin-right: 5px
-    font-size: 14px
-    transition: all .3s ease
-   
+    a 
+      margin:
+        left: 4px
+        right: 4px
+        
+      &is-active
+        cursor: default 
+        
+        
+
+        
 
 </style>
