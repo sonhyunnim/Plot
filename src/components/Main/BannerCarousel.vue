@@ -92,15 +92,12 @@ export default {
       opacity: 0.8
       position: absolute
       left: 65%
-      top: 40%
+      top: 30%
       width: 23%
       height: 60%
       z-index: 108
       text-align: right
-      
       padding: 20px
-  
-
   h2
     text-align: left
     font-size: 20px
