@@ -9,21 +9,21 @@
       </ul>
   </div> -->
   <div class="main">
-    <banner-carousel></banner-carousel>
+    <banner></banner>
     <ranking></ranking>
     <category></category>
     <recommand></recommand>
   </div>
 </template>
 <script>
-import BannerCarousel from './BannerCarousel';
+import Banner from './Banner';
 import Category from './Category';
 import Ranking from './Ranking';
 import Recommand from './Recommand';
 
 export default {
   components: {
-    BannerCarousel, Category, Ranking, Recommand
+    Banner, Category, Ranking, Recommand
   },
   data() {
      return {
