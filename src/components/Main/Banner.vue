@@ -48,21 +48,18 @@ export default {
     font-size: 1.6rem
 
   #banner
-    +container(1190px 12)
+    // +container(1190px 12)
     // margin-top: 20px
     color: #2c3e50
-  
-  
 
   .carousel-item
     position: relative
     overflow: hidden
-    padding-bottom: 35%
+    padding-bottom: 20%
 
-    
   .cover
       position: absolute
-      width: 80%
+      width: 90%
       height: auto
       top: 50%
       left: 50%

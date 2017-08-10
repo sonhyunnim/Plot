@@ -15,7 +15,7 @@
       </div>
     </div>
     <ul class="cg-items container">
-      <router-link v-for="data in datalist" to="/detail" class="active" active-class="activated"  tag="li">
+      <router-link v-for="data in datalist" to="/detail" tag="li">
         <a href=""><img :src="data.poster_img" alt=""></a> 
       </router-link> 
     </ul>
@@ -74,7 +74,6 @@ export default {
       console.log(e.target.value);
       if (e.target.value) {
         this.cg_lists[index].heading = e.target.value
-
       }
     }
   }
@@ -143,20 +142,21 @@ export default {
   //     text-decoration: none
   //     font: bold 2rem "Noto Sans kr", sans-serif
   .cg-items
-    +container(10 nest)
+    +span(12 of 12 nest)
     li
-      +span(2 of 10 .15)
+      +span(2 of 10 .17)
       // height: auto
       background: #1e0b65
       // border: 2px solid #fff
       margin-top: leading(2)
       position: relative
       overflow: hidden
-      padding-top: 30%
+      padding-top: 27%
+      border-radius: 3px
       img
         position: absolute
         width: auto
-        height: 85%
+        height: 100%
         top: 0
         left: 50%
         transform: translateX(-50%)
