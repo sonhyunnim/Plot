@@ -10,7 +10,7 @@
         <div class="login-page-center">
           <!--컨텐츠 로고 -->
           <div class="logo">
-              <img src="../assets/images/logo_w.svg" alt="plot 홈페이지 로고">  
+              <img src="../../assets/images/logo_w.svg" alt="plot 홈페이지 로고">  
              <!-- <h2></h2> -->
           </div>
           <form action="" class="login-page-form">
@@ -92,7 +92,7 @@
   }
 </script>
   
-<style lang="sass">
+<style lang="sass" scoped>
   @import "~config"
   // .page
   //   // background: url('../assets/images/bg_img.png') no-repeat
@@ -121,7 +121,7 @@
     width: 373px
     height: 504px
     box-shadow: 0 3px 59px 0 rgba(0, 0, 0, 0.5)
-    background: url('../assets/images/b_g.png') no-repeat
+    background: url('../../assets/images/b_g.png') no-repeat
     
   .logo
     height: leading(8)
