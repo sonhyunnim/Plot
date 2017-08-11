@@ -10,7 +10,7 @@
         <div class="join-page-center">
           <!--컨텐츠 로고 -->
             <div class="logo">
-              <img src="../assets/images/logo_w.svg" alt="plot 홈페이지 로고"> 
+              <img src="../../assets/images/logo_w.svg" alt="plot 홈페이지 로고"> 
             </div>
             <!--회원가입 관련 전체 컨텐츠 영역-->
           <div class="join-page-label">
@@ -87,7 +87,7 @@ export default {
 }
 </script>
   
-<style lang="sass">
+<style lang="sass" scoped>
   @import "~config"
   
   //그리드 시스템 
@@ -116,7 +116,7 @@ export default {
     width: 373px
     height: 504px
     box-shadow: 0 3px 59px 0 rgba(0, 0, 0, 0.5)
-    background: url('../assets/images/b_g.png') no-repeat
+    background: url('../../assets/images/b_g.png') no-repeat
 
   // plot 로고 
   .logo

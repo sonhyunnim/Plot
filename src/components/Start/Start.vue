@@ -8,7 +8,7 @@
       <div class="start-page-warpper">
         <div class="start-page-center">
           <div class="logo">
-            <img src="../assets/images/logo_w.svg" alt="plot 홈페이지 로고"> 
+            <img src="../../assets/images/logo_w.svg" alt="plot 홈페이지 로고"> 
           </div>
           <span class="service-msg">플롯은 나만의 전시공간 서비스입니다.</span>
           <div class="start-button-warpper">
@@ -42,7 +42,7 @@ export default {
 }
 </script>
   
-<style lang="sass">
+<style lang="sass" scoped>
   @import "~config"
   // .page
   //   // background: url('../assets/images/bg_img.png') no-repeat
@@ -78,7 +78,7 @@ export default {
     width: 373px
     height: 504px
     box-shadow: 0 3px 59px 0 rgba(0, 0, 0, 0.5)
-    background: url('../assets/images/b_g.png') no-repeat
+    background: url('../../assets/images/b_g.png') no-repeat
     
   .logo
    height: leading(12)
