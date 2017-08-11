@@ -2,30 +2,33 @@
   <div class="container" v-cloak>
     <h2 class="cg-heading container">카테고리</h2>
     <div class="container">
-      <div class="category" v-for="(list, index) in cg_lists">
+      <div class="category" :key="index" v-for="(list, index) in cg_lists">
         <h2 class="cg-list-heading">
           <a href="" @click.prevent="toggleList(list, $event)">{{list.heading}}</a>
         </h2>
         <ul v-if="list.items" class="cg-list" :class="{'active' : cg_lists[index] === isActive }">
           <li>
-             <a href="" @click.prevent="filterItem(index, $event)" v-for="item in list.items">{{item}}</a> 
+             <a href="" @click.prevent="filterItem(index, $event)" :key="index" v-for="(item,index) in list.items">{{item}}</a> 
           </li>
         </ul>
         <input v-if="!list.items" @click="changeText(index, $event)" class="cg-list" :class="{'active' : cg_lists[index] === isActive }" type="date">
       </div>
     </div>
     <ul class="cg-items container">
-      <router-link v-for="data in datalist" to="/detail" tag="li">
+      <router-link :key="index" v-for="(data,index) in initList" to="/detail" tag="li">
         <a href=""><img :src="data.poster_img" alt=""></a> 
       </router-link> 
     </ul>
-    <div class="more"><a href="">더보기</a></div>
+    <span class="more container"><a href="">더보기</a></span>
   </div>
 </template>
 <script>
+
 export default {
   computed: {
-    
+    initList: function () {
+      return this.$store.getters.getList
+    }
   },
   data() {
     return {
@@ -51,15 +54,6 @@ export default {
       ]
     }
   },
-  created(){ this.$http.get('https://plot-b2239.firebaseio.com/display.json')
-          .then(response => {
-            // console.log(Array.isArray(response.data));
-            const datalist = response.data;
-            this.datalist = datalist;
-            console.log(this.datalist);
-          })
-          .catch(error => console.log(error.message))
-  },
   methods: {
     toggleList(list, e){
       this.isActive === list ? this.isActive = '' : this.isActive = list
@@ -75,6 +69,9 @@ export default {
       if (e.target.value) {
         this.cg_lists[index].heading = e.target.value
       }
+    },
+    resetList(){
+      this.isActive = ''
     }
   }
   }
@@ -129,20 +126,10 @@ export default {
     z-index: 1000
   .active
     display: block
-  .more a
-    +push(5)
-  // .cg-sort
-  //   a
-  //     +span(2 last)
-  //     line-height: leading(2)
-  //     color: #1e0b65
-  //     border: 2px solid #1e0b65
-  //     height: leading(2)
-  //     margin-top: leading(2)
-  //     text-decoration: none
-  //     font: bold 2rem "Noto Sans kr", sans-serif
+
   .cg-items
     +span(12 of 12 nest)
+    margin-bottom: leading(2)
     li
       +span(2 of 10 .17)
       // height: auto
@@ -160,5 +147,19 @@ export default {
         top: 0
         left: 50%
         transform: translateX(-50%)
-
+  .more
+    display: inlineblock
+    padding-top: leading(2)
+    background: blue
+    a
+      +span(2)
+      +push(5)
+      border: 2px solid #1e0b65
+      height: leading(2)
+      line-height: leading(2)
+      padding-top: leading(1)/4
+      padding-left: leading(1)/4
+      color: #1e0b65
+      text-decoration: none
+      font: bold 2rem "Noto Sans kr", sans-serif
 </style>

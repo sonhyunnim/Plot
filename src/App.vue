@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <router-link :to="{}"></router-link> -->
     <router-view></router-view>
   </div>
 </template>
@@ -39,4 +38,5 @@ export default {
     background-image: url(./assets/images/bg_img.png)
     background-repeat: no-repeat
     background-size: 100%
+    background-attachment: fixed
 </style>

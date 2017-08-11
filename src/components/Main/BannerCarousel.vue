@@ -5,9 +5,9 @@
       <h2>1</h2>
       <h3>라이프 사진전</h3>
       <div class="text-sub">
-      예술의 전당<br>
-      한가람 미술관<br>
-      2017.7.7 - 2017.10.8
+        <span>예술의 전당</span>
+        <span>한가람 미술관</span>
+        <span>2017.7.7 - 2017.10.8</span>
       </div>
       <button type="button" class="carousel-button is-prev" @click="prevItem">
         <img src="https:icon.now.sh/chevron/13/rgb(30, 11, 101)/left" alt="prev item">
@@ -95,22 +95,26 @@ export default {
       top: 30%
       width: 23%
       height: 60%
-      z-index: 108
       text-align: right
-      padding: 20px
+      padding: 30px
   h2
     text-align: left
-    font-size: 20px
+    font-size: 2rem
   h3
     padding-top: 10px
-    border-top: 1px solid rgb(30, 11, 101)      
-    font-size: 25px
+    border-top: 1px solid rgb(30, 11, 101)
+    font-size: 2.5rem
     color: rgb(34, 34, 34)
     font-weight: bold
-    line-height: 1.2
+    line-height: leading(2)
+    // background: red
   .text-sub
-    padding-top: 15%
-    font-size: 12px;  
+    margin-top: 20% 
+    span
+      display: block
+      margin-top: 3%
+      font-size: 1.4rem
+      // background: blue
   .carousel-button
     position: absolute
     bottom: 5%
