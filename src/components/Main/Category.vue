@@ -8,15 +8,15 @@
         </h2>
         <ul v-if="list.items" class="cg-list" :class="{'active' : cg_lists[index] === isActive }">
           <li>
-             <a href="" @click.prevent="filterItem(index, $event)" :key="index" v-for="(item,index) in list.items">{{item}}</a> 
+             <a href="" @click.prevent="filterItem(index, $event)" :key="i" v-for="(item, i) in list.items">{{item}}</a> 
           </li>
         </ul>
         <input v-if="!list.items" @click="changeText(index, $event)" class="cg-list" :class="{'active' : cg_lists[index] === isActive }" type="date">
       </div>
     </div>
     <ul class="cg-items container">
-      <router-link :key="index" v-for="(data,index) in initList" to="/detail" tag="li">
-        <a href=""><img :src="data.poster_img" alt=""></a> 
+      <router-link :key="index" v-for="(data, index) in initList" to="/detail" tag="li">
+        <a href=""><img :src="data.poster_img" alt=""></a>
       </router-link> 
     </ul>
     <span class="more container"><a href="">더보기</a></span>
@@ -27,6 +27,7 @@
 export default {
   computed: {
     initList: function () {
+      console.log(this.$store.getters.getList);
       return this.$store.getters.getList
     }
   },
@@ -60,6 +61,8 @@ export default {
       // console.log(list.heading === '날짜별');
     },
     filterItem(index, e){
+      console.log(e.target);
+      console.log(index);
       let el = e.target
       this.cg_lists[index].heading = el.textContent
       this.isActive = ''
@@ -132,14 +135,23 @@ export default {
     margin-bottom: leading(2)
     li
       +span(2 of 10 .17)
-      // height: auto
       background: #1e0b65
-      // border: 2px solid #fff
       margin-top: leading(2)
       position: relative
       overflow: hidden
       padding-top: 27%
       border-radius: 3px
+      &:hover::before
+        display: block
+        content: ''
+        background: #333
+        opacity: 0.5
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        z-index: 2000
       img
         position: absolute
         width: auto
