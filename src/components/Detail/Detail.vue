@@ -1,7 +1,7 @@
 <template>
   <div class="modal is-active" >
       모달 액티브
-    <div class="modal-background" @click="closeModal">
+    <div class="modal-background" @click.self="closeModal">
         배경
       <div class="modal-content">
         <div class="header">
@@ -151,7 +151,7 @@ export default {
     background-color: rgb(255, 255, 255)
     padding-left: 30% 
     border-bottom: 1px solid rgb(213, 213, 213)
-    height: leading(8)
+    height: leading(9)
 
   h3
     font-weight: bold;
@@ -174,7 +174,8 @@ export default {
     margin: 3%
     font-size: 1.2rem
   .comments
-    margin: 3%   
+    padding: 5%
+    
   
     
     
