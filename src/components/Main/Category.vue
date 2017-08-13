@@ -3,6 +3,7 @@
     <h2 class="cg-heading container">카테고리</h2>
     <div class="container">
       <div class="category" :key="index" v-for="(list, index) in cg_lists">
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
         <h2 class="cg-list-heading">
           <a href="" @click.prevent="toggleList(list, $event)">{{list.heading}}</a>
         </h2>
@@ -14,10 +15,31 @@
         <input v-if="!list.items" @click="changeText(index, $event)" class="cg-list" :class="{'active' : cg_lists[index] === isActive }" type="date">
       </div>
     </div>
+
     <ul class="cg-items container">
-      <router-link :key="index" v-for="(data, index) in initList" to="/detail" tag="li">
-        <a href=""><img :src="data.poster_img" alt=""></a>
-      </router-link> 
+      <li :key="index" v-for="(data, index) in initList">
+        <img  :src="data.poster_img" alt="전시 포스터 이미지">
+        <div class="action-wrapper">
+          <router-link to="/detail" tag="a" class="detail-link"></router-link>
+          <div class="action-info">
+            <div class="display-title">{{data.title}}</div>
+            <div class="rating">
+              <i class="fa fa-star rating-number1" aria-hidden="true"></i>
+              <i class="fa fa-star rating-number2" aria-hidden="true"></i>
+              <i class="fa fa-star rating-number3" aria-hidden="true"></i>
+              <i class="fa fa-star rating-number4" aria-hidden="true"></i>
+              <i class="fa fa-star rating-number5" aria-hidden="true"></i>
+            </div>
+            <div class="wish-comment">
+              <div class="wish">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <a href="">보고싶어요</a>
+              </div>
+              <div class="comment"><a href="">코멘트쓰기</a></div>
+            </div>
+          </div>
+        </div>
+      </li>
     </ul>
     <span class="more container"><a href="">더보기</a></span>
   </div>
@@ -28,6 +50,7 @@ export default {
   computed: {
     initList: function () {
       console.log(this.$store.getters.getList);
+      this.$store.getters.getList.push(this.datalist)
       return this.$store.getters.getList
     }
   },
@@ -103,6 +126,7 @@ export default {
     +span(2)
     margin-top: leading(2)
     position: relative
+    background: red
     
   .cg-list-heading, .cg-list, .cg-sort-heading, .cg-sort
     border: 2px solid #1e0b65
@@ -141,17 +165,8 @@ export default {
       overflow: hidden
       padding-top: 27%
       border-radius: 3px
-      &:hover::before
-        display: block
-        content: ''
-        background: #333
-        opacity: 0.5
-        position: absolute
-        top: 0
-        bottom: 0
-        left: 0
-        right: 0
-        z-index: 2000
+      &:hover .action-wrapper
+        opacity: 1
       img
         position: absolute
         width: auto
@@ -159,6 +174,25 @@ export default {
         top: 0
         left: 50%
         transform: translateX(-50%)
+  .action-wrapper
+    position: absolute
+    bottom: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+  .detail-link
+    display: block
+    background: black
+    opacity: 0.5
+    width: 100%
+    height: 50%
+  .action-info
+    background: #fff
+    height: 50%
+  .fa-star
+    color: #666
+    &:hover
+      color: yellow
   .more
     display: inlineblock
     padding-top: leading(2)
