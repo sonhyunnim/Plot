@@ -22,24 +22,24 @@ import Search       from './components/Home/Search.vue'
 import Detail       from './components/Detail/Detail.vue'
 
 const routes = [
-  { path: '/', component: Start },
+  // { path: '/', component: Start },
   { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
   { path: '*', redirect: '/' },
-  // {  path: '/', component: Home ,
-  //   children:[
-  //     {  path: '/', component: Main },
-  //     {  path: '/detail', component: Detail },
-  //     {  path: '/search', component: Search },
-  //     {  path: '/mypage', component: Mypage, 
-  //       children:[
-  //         {  path: '/mypage', component: Wishlist },
-  //         {  path: '/mypage/display', component: Display },
-  //         {  path: '/mypage/comments', component: Comments }
-  //       ]
-  //     },
-  //   ]
-  // },
+  {  path: '/', component: Home ,
+    children:[
+      {  path: '/', component: Main },
+      {  path: '/detail', component: Detail },
+      {  path: '/search', component: Search },
+      {  path: '/mypage', component: Mypage, 
+        children:[
+          {  path: '/mypage', component: Wishlist },
+          {  path: '/mypage/display', component: Display },
+          {  path: '/mypage/comments', component: Comments }
+        ]
+      },
+    ]
+  },
 ];
 
 const router = new VueRouter({
