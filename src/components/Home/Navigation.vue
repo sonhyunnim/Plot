@@ -11,8 +11,21 @@
           <router-link to="/"  class="user signin active" active-class="activated"  tag="li"> 
           <a href>홈</a>
           </router-link>
-          <router-link to="/search" class="user signup active" active-class="activated" tag="li">
-            <a href>검색</a>
+          <router-link to="/search" class="user signup active" active-class="activated" tag="li" >
+            <form class="form">
+              <label for="search">
+                <input 
+                id="search-input"
+                type="text"
+                placeholder="Search"
+                :class="{ active: isActive }"
+                @blur="isActive = false">
+                <i 
+                class="fa fa-search" 
+                @click.self="gotoSearch"
+                 ></i>
+              </label>
+            </form>   
           </router-link>
           <router-link to="/"  class="user signin active" active-class="activated"  tag="li"> 
             <a href>카테고리</a>
@@ -30,17 +43,23 @@
 </template>
 <script>
 
-import Search from './Search'
+// import Search from './Search'
 export default {
   data() {
      return {
-
-
+     isActive: false
     }
   },
   components: {
-    Search
+    // Search
+  },
+  methods: {
+    gotoSearch(){
+      this.$router.push( {path: '/search'} )
+
+    }
   }
+  
 }
 </script>
 <style lang="sass" scoped>
@@ -69,4 +88,11 @@ export default {
           font: bold 2rem "Noto Sans kr", sans-serif
           color: #1e0b65
           text-decoration: none
+
+
+  input 
+    // display: none
+  .active
+    display: block
+      
 </style>
