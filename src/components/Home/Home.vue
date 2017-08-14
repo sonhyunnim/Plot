@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="background">
     <navigation class="navigation"></navigation>
     <router-view></router-view>
   </div>
@@ -24,4 +24,9 @@ export default {
     top: 0
     // background: #fff
     z-index: 2000
+  .background
+    background-image: url(../../assets/images/bg_img.png)
+    background-repeat: no-repeat
+    background-size: 100%
+    background-attachment: fixed
 </style>

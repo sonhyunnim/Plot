@@ -13,6 +13,7 @@ Vue.prototype.$http = axios;
 // store 설정
 store.dispatch('initList', 'https://plot-b2239.firebaseio.com/display.json');
 
+
 // Vue 인스턴스 생성
 new Vue({
   el: '#app',
