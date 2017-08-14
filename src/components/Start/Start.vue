@@ -1,5 +1,5 @@
 <template>
-  
+  <div class="container">
     <div class="start-content">
       <img class="logo" src="../../assets/images/logo_w.svg" alt="plot 홈페이지 로고"> 
       <span class="service-msg">플롯은 나만의 전시공간 서비스입니다.</span>
@@ -9,7 +9,7 @@
         <a href class="join-link" @click.prevent="signupLink">회원가입</a> 
       </div>
     </div>
-  
+  </div>
 </template>
   
 <script>
@@ -32,8 +32,9 @@ export default {
   
 <style lang="sass" scoped>
   @import "~config"
- 
-    
+  .container
+    +container(1190px 12)
+    height: 100vh
   .start-content
     position: relative
     margin: 0 auto
@@ -57,12 +58,12 @@ export default {
     display: block
     border: 2px solid rgb(255, 255, 255)
     width: 175px
-    height: 42px
+    height: leading(2)
     margin: 20px auto
     text-decoration: none
     margin-bottom: leading(1)
     color: #fff
-    line-height: 3.8rem
+    line-height: leading(2)
   .service-msg
     display: block
     padding-top: leading(6)
