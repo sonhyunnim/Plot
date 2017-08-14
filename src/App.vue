@@ -34,9 +34,5 @@ export default {
   body
     margin: 0
     font-size: 1.6rem
-  #app
-    background-image: url(./assets/images/bg_img.png)
-    background-repeat: no-repeat
-    background-size: 100%
-    background-attachment: fixed
+  
 </style>
