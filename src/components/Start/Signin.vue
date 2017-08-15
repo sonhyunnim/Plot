@@ -53,9 +53,9 @@ export default {
   @import "~config"
 
   h2
-    color: rgb(255,255,255)  
+    color: rgb(255,255,255)
     font-size: 2rem
-    padding-top: leading(3)
+    padding-top: leading(2)
 
   input
     display: block

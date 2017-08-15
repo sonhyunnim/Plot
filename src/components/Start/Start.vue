@@ -34,7 +34,7 @@ export default {
   
   
   .logo
-    width: 150px
+    width: 230px
     padding-top: leading(2)
 
   .start-button-wrapper
