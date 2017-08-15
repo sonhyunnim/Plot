@@ -17,9 +17,12 @@
             <div class="wish-comment">
               <div class="wish">
                 <i class="fa fa-heart" aria-hidden="true"></i>
-                <a href="">보고싶어요</a>
+                <a href="#">보고싶어요</a>
               </div>
-              <div class="comment"><a href="">코멘트쓰기</a></div>
+              <div class="comment">
+                <i class="fa fa-comment" aria-hidden="true"></i>
+                <a href="#">코멘트쓰기</a>
+              </div>
             </div>
           </div>
         </div>
@@ -81,13 +84,38 @@ export default {
     opacity: 0.5
     width: 100%
     height: 50%
+
   .action-info
     background: #fff
     height: 50%
+    text-align: center
+    padding: leading(1)/2
+    font: 1.4rem "Noto Sans kr", sans-serif
+
+  .display-title
+    padding-bottom: leading(1)/2
+    border-bottom: 1px solid #999
+  .rating
+    margin-top: leading(1)
+  .wish-comment
+    margin-top: leading(1)
+    display: flex
+    justify-content: space-around
+    a
+      text-decoration: none
+      color: #333
+  .wish:hover a, .wish:hover .fa-heart
+    color: #ff5539
+  .comment:hover a, .comment:hover .fa-comment
+    color: #5d5df6
   .fa-star
-    color: #666
+    color: #999
+    font-size: 2.5rem
     &:hover
-      color: yellow
+      color: rgb(255, 205, 26)
+  .fa-heart, .fa-comment
+    color: #999
+
   .more
     padding-top: leading(2)
     text-align: center

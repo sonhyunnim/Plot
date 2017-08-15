@@ -1,7 +1,15 @@
 <!--Ranking Carousel --> 
 <template>
   <div class="container">
-    <div class="ranking">실시간 랭킹</div>
+    <div class="ranking">
+      <ul class="ranking-list">
+        <li><a href="#">1. 픽사 애니메이션 30주년 특별전</a></li>
+        <li><a href="#">2. 이상한 나라의 앨리스</a></li>
+        <li><a href="#">3. 어둠속의 대화</a></li>
+        <li><a href="#">4. 즐거운 나의 집</a></li>
+        <li><a href="#">5. 라이프 사진전</a></li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -27,4 +35,13 @@ export default {
     height: leading(2)
     color: #fff
     font: bold 2rem "Noto Sans kr", sans-serif
+    overflow: hidden
+    &:hover
+      height: leading(10)
+  .ranking-list
+    a
+      text-decoration: none
+      line-height: leading(2)
+      padding-left: leading(1)/2
+      color: #fff
 </style>

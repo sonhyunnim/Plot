@@ -26,7 +26,6 @@ export default {
     //   state.displayList.push(payload);
     // },
     filterList: (state, payload) => {
-      console.log(payload);
       let filter_title = payload
       let displayList = JSON.parse(JSON.stringify(state.displayList));
       let filteredList = displayList.filter(function (param) {
@@ -36,12 +35,8 @@ export default {
         if (filter_title[1] === '모든 지역') {
           param.location = '모든 지역'
         }
-        if (filter_title[1] === '모든 날짜') {
+        if (filter_title[2] === '모든 날짜') {
           param.duration = '모든 날짜'
-        }
-        if (filter_title[1] === '모든 지역') {
-          param.location = '모든 지역'
-          console.log(filter_title);
         }
         if (param.genre === filter_title[0] && param.location === filter_title[1]) {
           return true

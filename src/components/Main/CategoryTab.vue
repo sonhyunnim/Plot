@@ -4,15 +4,15 @@
     <div class="container categorys">
       <div class="category" :key="index" v-for="(list, index) in cg_lists">
         <h2 class="cg-list-heading">
-          <a href="" @click.prevent="toggleList(list, $event)">
+          <a href="" @click.prevent="toggleList(list, $event)" @blur="leaveList">
             {{list.heading}}
             <i class="fa fa-caret-down" aria-hidden="true"></i>
           </a>
         </h2>
         <ul class="cg-list" :class="{'active' : cg_lists[index] === isActive }">
           <li>
-            <a href="" @click.prevent="filterItem(index, $event)" :key="i" v-for="(item, i) in list.items">{{item}}</a> 
-            <input v-if="index === 2" @click="changeText(index, $event)" class="cg-list-date" :class="{'active' : cg_lists[index] === isActive }" type="date">
+            <a href="" @click.prevent="filterItem(index, $event)" :key="i" v-for="(item, i) in list.items">{{item}}</a>
+            <input v-if="index === 2" :value="dateInput" @change="changeText(index, $event)" class="cg-list-date" :class="{'active' : cg_lists[index] === isActive }" type="date">
           </li>
         </ul>
       </div>
@@ -22,6 +22,11 @@
   
 <script>
 export default {
+  computed:{
+    dateInput: function () {
+      return this.date
+    }
+  },
   data() {
     return {
       date: '',
@@ -51,7 +56,7 @@ export default {
     toggleList(list, e){
       let listIcon = e.target.lastChild
       this.isActive === list ? this.isActive = '' : this.isActive = list
-      console.log(listIcon)
+      // console.log(listIcon)
       // listIcon.classList.add('fa-caret-down')&&listIcon.classList.remove('fa-caret-up')
       // listIcon.classList.add('fa-caret-up')&&listIcon.classList.remove('fa-caret-down')
       
@@ -63,17 +68,25 @@ export default {
       let filter_title = this.cg_lists.map(function(lists) {
         return lists.heading
       })
-      console.log(filter_title);
       this.$store.commit('filterList', filter_title)
     },
+    updateInput(e){
+      this.date = e.target.value
+    },
     changeText(index, e){
-      console.log(e.target.value);
       if (e.target.value) {
         this.cg_lists[index].heading = e.target.value
       }
-    },
-    resetList(){
+      // console.log(e.target.value);
       this.isActive = ''
+    },
+    leaveList(e){
+      console.log(e.target);
+      // if(){
+      //   return
+      // }else{
+      //   return this.isActive = ''
+      // }
     }
   }
 }
@@ -89,7 +102,7 @@ export default {
 
   .cg-heading
     margin-top: leading(2)
-    padding-left: leading(1)/4
+    padding-left: leading(1)/2
     background: #1e0b65
     color: #fff
     font: bold 2rem "Noto Sans kr", sans-serif
@@ -111,13 +124,14 @@ export default {
     
   .cg-list-heading, .cg-list, .cg-sort-heading, .cg-sort
     border: 2px solid #1e0b65
+    background: #fff
     a
-      padding-top: leading(1)/4
-      padding-left: leading(1)/4
+      padding: leading(1)/4 0 leading(1)/4 leading(1)/2
       color: #1e0b65
       display: block
       text-decoration: none
       font: bold 2rem "Noto Sans kr", sans-serif
+      height: 100%
       
   .cg-list-heading, .cg-sort-heading
     height: leading(2)
@@ -127,14 +141,14 @@ export default {
     max-height: leading(7)
     overflow: scroll
     border-top: none
-    background: #fff
     position: absolute
     width: 100%
     top: leading(2)
     z-index: 1000
+  .cg-list a:hover
+    background: #1e0b65
+    color: #fff
 
-  .category::last-of-type
-    background: red
   .active
     display: block
 
@@ -143,8 +157,11 @@ export default {
     width: 100%
     z-index: 1000
     border: none
-    padding-top: leading(1)/4
-    padding-left: leading(1)/4
+    padding: leading(1)/4 0 leading(1)/4 leading(1)/2
+    height: 100%
     color: #1e0b65
     font: bold 2rem "Noto Sans kr", sans-serif
+    &:hover
+      background: #1e0b65
+      color: #fff
 </style>

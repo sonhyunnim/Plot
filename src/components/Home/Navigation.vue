@@ -8,10 +8,10 @@
     
       <div class="menu">
         <ul>
-          <router-link to="/"  class="user signin active" active-class="activated"  tag="li"> 
+          <router-link to="/" active-class="activated"  tag="li"> 
           <a href>홈</a>
           </router-link>
-          <router-link to="/search" class="user signup active" active-class="activated" tag="li" >
+          <router-link to="/search" active-class="activated" tag="li" >
             <form class="form">
               <label for="search">
                 <input 
@@ -27,14 +27,14 @@
               </label>
             </form>   
           </router-link>
-          <router-link to="/"  class="user signin active" active-class="activated"  tag="li"> 
+          <router-link to="/" active-class="activated"  tag="li"> 
             <a href>카테고리</a>
           </router-link>
-          <router-link to="/"  class="user signin active" active-class="activated"  tag="li"> 
+          <router-link to="/" active-class="activated"  tag="li"> 
             <a href>추천</a>
           </router-link>
-          <router-link to="/mypage"  class="user signin active" active-class="activated"  tag="li"> 
-            <a href>유저</a>
+          <router-link to="/mypage" active-class="activated" class="mypage"  tag="li"> 
+            <a href><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
           </router-link>
         </ul>
       </div>
@@ -88,11 +88,14 @@ export default {
           font: bold 2rem "Noto Sans kr", sans-serif
           color: #1e0b65
           text-decoration: none
-
+          line-height: leading(2)
 
   input 
     // display: none
   .active
     display: block
-      
+  .fa-user-circle-o
+    line-height: leading(2)
+    font-size: 3rem
+
 </style>
