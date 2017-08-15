@@ -1,61 +1,66 @@
 <template>
-  <div class="container">
-    <div class="signup">
-      <h2>회원가입</h2>
-      <form action="" class="login-page-form">
-        <div class="signup-input-group">
-          <label class="signup-name">
-            <input class="input-name" type="text" placeholder="이름(홍길동)" required> 
-          </label>
-          <label class="signup-email">
-             <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required>
-          </label>
-          <label class="signup-pw">
-            <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required>
-          </label>
-        </div>
-
-        <!-- <div class="signup-link">
-              <button class="signup-submit" type="submit">가입하기</button>
-        </div> -->
-      <div class="signup-agreememt">
-        <!--플롯 사이트 서비스에 관한 동의 요구 -->
-        <div class="signup-agreememt-item">
-          <input id="signup-service-agreememt" type="checkbox">
-            <label class="signup-agreement-label" for="signup-agreement" >
-              <a class="signup-agreement-link" href="#">플롯 서비스 이용약관</a>
-              <span>에 동의합니다.</span>
-            </label>
-        </div>
-        <!--개인정보 수집 이용에 관한 동의 요구-->
-        <div class="signup-agreememt-item">
-          <input id="signup-privacy-agreememt" type="checkbox">
-            <label class="signup-agreement-label" for="signup-agreement" >
-              <a class="signup-agreement-link" href="#">개인정보 수집 이용</a>
-              <span>에 동의합니다.</span>
-            </label>
-        </div>
+  <div class="signup">
+    <h2>회원가입</h2>
+    <form action="" class="login-page-form">
+      <div class="signup-input-group">
+        <label class="signup-name">
+          <input class="input-name" type="text" placeholder="이름(홍길동)" required> 
+        </label>
+        <label class="signup-email">
+            <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required>
+        </label>
+        <label class="signup-pw">
+          <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required>
+        </label>
       </div>
-      
-      <div class="signup-button-wrapper">
-        
-        <button 
-        class="signup-link" 
-        type="submit"
-        @click="onConfirm">가입하기</button>
-        <!-- <a href class="signup-link" @click.prevent="signupLink">가입하기</a>  -->
-        <a href class="signin-link" @click.prevent="signinLink">로그인</a>
-        <a href class="facebook-link" @click.prevent="facebookLink"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
-      </div>
-      </form>
 
+      <!-- <div class="signup-link">
+            <button class="signup-submit" type="submit">가입하기</button>
+      </div> -->
+    <div class="signup-agreememt">
+      <!--플롯 사이트 서비스에 관한 동의 요구 -->
+      <div class="signup-agreememt-item">
+        <input id="signup-service-agreememt" type="checkbox">
+          <label class="signup-agreement-label" for="signup-agreement" >
+            <a class="signup-agreement-link" href="#">플롯 서비스 이용약관</a>
+            <span>에 동의합니다.</span>
+          </label>
+      </div>
+      <!--개인정보 수집 이용에 관한 동의 요구-->
+      <div class="signup-agreememt-item">
+        <input id="signup-privacy-agreememt" type="checkbox">
+          <label class="signup-agreement-label" for="signup-agreement" >
+            <a class="signup-agreement-link" href="#">개인정보 수집 이용</a>
+            <span>에 동의합니다.</span>
+          </label>
+      </div>
     </div>
+    
+    <div class="signup-button-wrapper">
+      
+      <button 
+      class="signup-link" 
+      type="submit"
+      @click="onConfirm">가입하기</button>
+      <!-- <a href class="signup-link" @click.prevent="signupLink">가입하기</a>  -->
+      <a href class="signin-link" @click.prevent="signinLink">로그인</a>
+      <a href class="facebook-link" @click.prevent="facebookLink"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
+    </div>
+    </form>
   </div>
 </template>
   
 <script>
 
 export default {
+   beforeRouteUpdate (to, from, next) {
+    if( this.is_confirm ) {
+      next();
+    } 
+      
+       next();
+    },
+ 
   data() {
       return {
         user_input: {
@@ -87,21 +92,7 @@ export default {
   
 <style lang="sass" scoped>
   @import "~config"
-  .container
-    +container(1190px 12)
-    height: 100vh
-
-  .signup
-    margin: 0 auto
-    margin-top: leading(4)
-    background: url('../../assets/images/b_g.png') no-repeat
-    background-size: cover
-    // width: span(5)
-    width: 476px
-    height: leading(24)
-    text-align: center
-    box-shadow: 0px 3px 59px 0px rgba(0, 0, 0, 0.5)
-
+  
   h2
     color: rgb(255,255,255)  
     font-size: 2rem
