@@ -29,16 +29,19 @@ export default {
     +container(1190px 12)
 
   .ranking
-    +span(4 last)
     margin-top: leading(2)
-    background: #1e0b65
     height: leading(2)
-    color: #fff
-    font: bold 2rem "Noto Sans kr", sans-serif
-    overflow: hidden
-    &:hover
+    +span(4 last)
+    &:hover .ranking-list
       height: leading(10)
   .ranking-list
+    // width: 100%
+    background: #1e0b65
+    color: #fff
+    font: bold 2rem "Noto Sans kr", sans-serif
+    position: absolute
+    overflow: hidden
+    height: leading(2)
     a
       text-decoration: none
       line-height: leading(2)
