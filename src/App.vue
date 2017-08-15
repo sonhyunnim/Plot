@@ -1,14 +1,17 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div id="app" :is=root>
   </div>
 </template>
 
 <script>
+  
+ import Root from './components/Start/Root.vue';
+ import Home from './components/Home/Home.vue';
 
 export default {
   name: 'app',
   components: {
+    Root, Home
     },
   data () {
     return {
@@ -17,9 +20,16 @@ export default {
         // file-loader를 사용하지 않고, 직접 속성 값을 설정하기 때문
         path: './src/assets/logo.png',
         label: 'Vue.js'
-      }
+      },
+    root: 'root'
+    }
+  },
+  methods: {
+    isRoot() {
+      this.root = 'home';
     }
   }
+  
 }
 </script>
 

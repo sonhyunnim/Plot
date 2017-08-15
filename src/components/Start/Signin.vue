@@ -1,22 +1,20 @@
 <template>
-  <div class="container">
-    <div class="signin">
-      <h2>로그인</h2>
-      <form action="" class="login-page-form">
-        <div class="signin-input-group">
-          <label class="signin-email">
-            <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required v-model="user_input.email">
-          </label>
-          <label class="signin-pw">
-            <input class="input-pw" type="password" value placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required v-model="user_input.password">
-          </label>
-        </div>
-      </form>
-      <div class="signin-button-wrapper">
-        <a href class="signin-link">로그인</a>
-        <a href class="signup-link" @click="signupLink">회원가입 하기</a> 
-        <a href class="facebook-link" @click.prevent="facebookLink"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
+  <div class="signin">
+    <h2>로그인</h2>
+    <form action="" class="login-page-form">
+      <div class="signin-input-group">
+        <label class="signin-email">
+          <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required v-model="user_input.email">
+        </label>
+        <label class="signin-pw">
+          <input class="input-pw" type="password" value placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required v-model="user_input.password">
+        </label>
       </div>
+    </form>
+    <div class="signin-button-wrapper">
+      <a href class="signin-link">로그인 하기</a>
+      <a href class="signup-link" @click="signupLink">회원가입 하기</a> 
+      <a href class="facebook-link" @click.prevent="facebookLink"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
     </div>
   </div>
 </template>
@@ -24,6 +22,7 @@
 <script>
 
 export default {
+ 
   data() {
       return {
         user_input: {
@@ -34,14 +33,7 @@ export default {
         datalist: []
       }
     },
-    computed: {
-      validation: function () {
-        return {
-          email: emailRegex.test(this.user_input.email),
-          password: pwRegex.test(this.user_input.password)
-        }
-      }
-    },
+    
   methods: {
     facebookLink: function(){
       this.$router.push({path: '/'});
@@ -59,19 +51,6 @@ export default {
   
 <style lang="sass" scoped>
   @import "~config"
-  .container
-    +container(1190px 12)
-    height: 100vh
-
-  .signin
-    margin: 0 auto
-    margin-top: leading(4)
-    background: url('../../assets/images/b_g.png') no-repeat
-    background-size: cover
-    width: 476px
-    height: leading(24)
-    text-align: center
-    box-shadow: 0px 3px 59px 0px rgba(0, 0, 0, 0.5)
 
   h2
     color: rgb(255,255,255)  

@@ -5,6 +5,7 @@ import VueRouter    from 'vue-router'
 Vue.use(VueRouter);
 
 //login
+import Root         from './components/Start/Root.vue'
 import Start        from './components/Start/Start.vue'
 import SignIn       from './components/Start/SignIn.vue'
 import SignUp       from './components/Start/SignUp.vue'
@@ -22,13 +23,14 @@ import Search       from './components/Home/Search.vue'
 import Detail       from './components/Detail/Detail.vue'
 
 const routes = [
-  // { path: '/', component: Start },
+  { path: '/', component: Start },
   { path: '/signin', component: SignIn },
   { path: '/signup', component: SignUp },
   { path: '*', redirect: '/' },
-  {  path: '/', component: Home ,
-    children:[
-      {  path: '/', component: Main },
+
+  // {  path: '/', component: Home , 
+  {  path: '/', component: Main, 
+      children:[
       {  path: '/detail', component: Detail },
       {  path: '/search', component: Search },
       {  path: '/mypage', component: Mypage, 
@@ -40,6 +42,8 @@ const routes = [
       },
     ]
   },
+
+  
 ];
 
 const router = new VueRouter({

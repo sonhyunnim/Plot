@@ -1,5 +1,4 @@
 <template>
-  <div class="container">
     <div class="start">
       <img class="logo" src="../../assets/images/logo_w.svg" alt="plot 홈페이지 로고"> 
       <span class="service-msg">플롯은 나만의 전시공간 서비스입니다.</span>
@@ -8,8 +7,8 @@
         <a href class="signin-link" @click.prevent="signinLink">로그인</a>
         <a href class="signup-link" @click.prevent="signupLink">회원가입</a> 
       </div>
+      <router-view></router-view>
     </div>
-  </div>
 </template>
   
 <script>
@@ -32,19 +31,7 @@ export default {
   
 <style lang="sass" scoped>
   @import "~config"
-  .container
-    +container(1190px 12)
-    height: 100vh
-  .start
-    margin: 0 auto
-    margin-top: leading(5)
-    background: url('../../assets/images/b_g.png') no-repeat
-    background-size: cover
-    width: 476px 
-    // width: span(5)
-    height: leading(24)
-    text-align: center
-    box-shadow: 0px 3px 59px 0px rgba(0, 0, 0, 0.5)
+  
   
   .logo
     width: 150px
