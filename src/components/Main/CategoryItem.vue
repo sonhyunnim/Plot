@@ -4,7 +4,7 @@
       <li :key="index" v-for="(data, index) in filterList">
         <img  :src="data.poster_img" alt="전시 포스터 이미지">
         <div class="action-wrapper">
-          <router-link to="/detail" tag="a" class="detail-link"></router-link>
+          <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link"></router-link>
           <div class="action-info">
             <div class="display-title">{{data.title}}</div>
             <div class="rating">

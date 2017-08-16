@@ -1,11 +1,9 @@
 <template>
   <div class="modal is-active" >
-      모달 액티브
     <div class="modal-background" @click.self="closeModal">
-        배경
       <div class="modal-content">
         <div class="header">
-          <img class="stillcut" :src="datalist[0].thumbnail_img[1]" alt="PIXAR 스틸컷" >
+          <img class="stillcut" :src="datalist.thumbnail_img[0]" alt="PIXAR 스틸컷" >
           <div class="item expect-rating">
             <!-- <h4 class="rating-title">별점</h4>
             <span class="rating">4</span> -->
@@ -13,18 +11,19 @@
         </div>
         <div class="footer">
           <div class="frame">
-            <img class="detail" :src="datalist[0].poster_img" alt="PIXAR 포스터">
+            <img class="detail" :src="datalist.poster_img" alt="PIXAR 포스터">
           </div>
           <div class="wrapper">
-            <h3>{{ datalist[0].title}}</h3>
+            <h3>{{ datalist.title }}</h3>
+            <h3>{{ id }}</h3>
             <ul class="information">
-              <li>전시 장소: {{datalist[0].place}} </li>
-              <li>운영 시간: {{datalist[0].time}}</li>
-              <li>전시 주최: {{datalist[0].author}}</li>
-              <li>관람 등급: {{datalist[0].grade}}</li>
-              <li>전시 장르: {{datalist[0].genre}}</li>
-              <li>전시 지역: {{datalist[0].location}}</li>
-              <li>전시 기간:{{datalist[0].duration}}</li>
+              <li>전시 장소: {{ datalist.place }} </li>
+              <li>운영 시간: {{ datalist.time }}</li>
+              <li>전시 주최: {{ datalist.author }}</li>
+              <li>관람 등급: {{ datalist.grade }}</li>
+              <li>전시 장르: {{ datalist.genre }}</li>
+              <li>전시 지역: {{ datalist.location }}</li>
+              <li>전시 기간: {{ datalist.duration }}</li>
             </ul>
           </div>
           <div class="review">
@@ -37,7 +36,7 @@
                 이 영화의 역순구성은 그저 드라마틱한 효과를 위한 것이 아니라 인물에게 '안식'을 선사하는 것이 아닐까 한다.
               </li>
               <li class="review-list">
-                삶의 감격에 눈물 흘리며 순수하고 싶던  한남자
+                삶의 감격에 눈물 흘리며 순수하고 싶던 한남자
                 급변했던 대한민국의 현대사를 온몸으로 겪어내며 절규하는 한남자
                 내인생 최고의 영화
               </li>
@@ -53,21 +52,27 @@
 <script>
 
 export default {
+  // beforeCreate(){
+  //   let getList = this.$store.getters.getList;
+  //   this.dataList = getList[this.id];
+  //   console.log(this.dataList);
+  //   console.log(this.dataList.title);
+  // },
+  created(){
+    let getList = this.$store.getters.getList;
+    this.datalist = getList[this.id];
+  },
   data() {
     return {
       data: '',
-      datalist: []
+      datalist: {},
+      id: this.$route.params.Id
     }
   },
-  created(){ this.$http.get('https://plot-b2239.firebaseio.com/display.json')
-          .then(response => {
-            const datalist = response.data;
-            this.datalist = datalist;
-            // console.log(this.datalist[0].thumbnail_img[0]);
-            console.log(this.datalist);
-            window.data = this.datalist;
-          })
-          .catch(error => console.log(error.message))
+  watch:{
+    '$route' (to, from) {
+      this.id = to.params.Id;
+    },
   },
   methods: {
     closeModal() {
@@ -129,7 +134,7 @@ export default {
     top: 80%
     left: 30%
   .rating-title
-    color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255)
     
   .rating
     color: #fff  
@@ -154,11 +159,11 @@ export default {
     height: leading(9)
 
   h3
-    font-weight: bold;
+    font-weight: bold
     line-height: 4rem
-    font-size: 2.5rem;
-    color: rgb(51, 51, 51);
-    margin-bottom: 5%;  
+    font-size: 2.5rem
+    color: rgb(51, 51, 51)
+    margin-bottom: 5%
     border-bottom: 1px solid rgb(213, 213, 213)
   .information
     font-size: 1.2rem
