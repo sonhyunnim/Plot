@@ -19,8 +19,8 @@ export default {
 
   mutations: {
     initList: (state, payload) => {
-      state.filterList = payload;
       state.displayList = payload;
+      state.filterList = payload;
     },
     // addList: (state, payload) => {
     //   state.displayList.push(payload);

@@ -35,7 +35,7 @@ const routes = [
         { path: '/home', component: Home,
           children:[
             {  path: '/home', component: Main },
-            {  path: '/detail', component: Detail },
+            {  path: '/detail/:Id', name: 'detail', component: Detail, props: true},
             {  path: '/search', component: Search },
             {  path: '/mypage', component: Mypage, 
               children:[
