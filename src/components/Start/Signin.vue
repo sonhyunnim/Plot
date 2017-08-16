@@ -4,10 +4,10 @@
     <form action="" class="login-page-form">
       <div class="signin-input-group">
         <label class="signin-email">
-          <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required v-model="user_input.email">
+          <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required v-model="email">
         </label>
         <label class="signin-pw">
-          <input class="input-pw" type="password" value placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required v-model="user_input.password">
+          <input class="input-pw" type="password" value placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required v-model="password">
         </label>
       </div>
     </form>
@@ -22,19 +22,20 @@
 <script>
 
 export default {
+  computed: {
+    userList: function () {
+      return this.$store.getters.getuserInfo
+    }
+  },
  
   data() {
-      return {
-        user_input: {
-          name: '',
-          email: '',
-          password: ''
-        },
-        datalist: []
-      }
-    },
+    return {
+      email: '',
+      password: '',
+    }
+  },
     
-  methods: {
+methods: {
     facebookLink: function(){
       this.$router.push({path: '/signin'});
     },
@@ -43,8 +44,14 @@ export default {
     },
     signupLink: function(){
       this.$router.push({path: '/signup'})
+    },
+    setUserInfo() {
+        this.$store.commit('userInfo', {
+        "email": this.email,
+        "password": this.password,
+      });
     }
-   }
+  }
   
 }
 </script>

@@ -1,22 +1,20 @@
 <template>
   <div class="signup">
     <h2>회원가입</h2>
-    <form action="" class="login-page-form">
+    <form class="login-page-form">
       <div class="signup-input-group">
         <label class="signup-name">
-          <input class="input-name" type="text" placeholder="이름(홍길동)" required> 
+          <input class="input-name" type="text" placeholder="이름(홍길동)" v-model="user_input.username" required> 
         </label>
         <label class="signup-email">
-            <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required>
+            <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" v-model="user_input.email" required>
         </label>
         <label class="signup-pw">
-          <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required>
+          <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" v-model="user_input.password" required>
         </label>
-      </div>
+      </div> 
 
-      <!-- <div class="signup-link">
-            <button class="signup-submit" type="submit">가입하기</button>
-      </div> -->
+
     <div class="signup-agreememt">
       <!--플롯 사이트 서비스에 관한 동의 요구 -->
       <div class="signup-agreememt-item">
@@ -41,7 +39,7 @@
       <button 
       class="signup-link" 
       type="submit"
-      @click="onConfirm">가입하기</button>
+      @click.prevent="signUp">가입하기</button>
       <!-- <a href class="signup-link" @click.prevent="signupLink">가입하기</a>  -->
       <a href class="signin-link" @click.prevent="signinLink">로그인</a>
       <a href class="facebook-link" @click.prevent="facebookLink"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
@@ -53,25 +51,17 @@
 <script>
 
 export default {
-   beforeRouteUpdate (to, from, next) {
-    if( this.is_confirm ) {
-      next();
-    } 
-      
-       next();
-    },
- 
   data() {
       return {
         user_input: {
-          name: '',
+          username: '',
           email: '',
           password: ''
-        },
-        datalist: [],
-        is_confirm: false
+        }
       }
     },
+  
+ 
   methods: {
     facebookLink: function(){
       this.$router.push({path: '/'});
@@ -82,10 +72,35 @@ export default {
     signupLink: function(){
       this.$router.push({path: '/signup'})
     },
-    onConfirm() {
-      this.is_confirm = true;
+    signUp() {
+        console.log(this.user_input);
+        let _this = this;
+        let url = this.$store.state.url + '/api/member/signup/';
+        console.log(_this.user_input.name)
+        this.$http.post(url, {
+            username: _this.user_input.username,
+            email: _this.user_input.email,
+            nickname: _this.user_input.username,
+            password: _this.user_input.password,
+            password2: _this.user_input.password
+        })
+        .then(response => {
+          if(response.status === 201) {
+            console.log('success');
+            console.log(response);
+            alert('회원가입이 성공적으로 완료되었습니다');
+            this.$router.push({path: '/signin'});
+          }
+        })
+        .catch(error => {
+          console.log('error.response: ', error.response);
+        });
+      //   this.$store.commit('userInfo', {
+      //    userInfo : this.user_input
+        
+      // });
     }
-   }
+  }
   
 }
 </script>
@@ -144,16 +159,4 @@ export default {
     font-size: 2rem 
       
     
-    
-
-
-
-  
-
-
-
-
-  
-  
-
 </style>
