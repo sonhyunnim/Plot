@@ -12,8 +12,8 @@
       </div>
     </form>
     <div class="signin-button-wrapper">
-      <a href class="signin-link">로그인 하기</a>
-      <a href class="signup-link" @click="signupLink">회원가입 하기</a> 
+      <a href class="signin-link" @click.prevent="signinLink">로그인 하기</a>
+      <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
       <a href class="facebook-link" @click.prevent="facebookLink"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
     </div>
   </div>
@@ -36,10 +36,10 @@ export default {
     
   methods: {
     facebookLink: function(){
-      this.$router.push({path: '/'});
+      this.$router.push({path: '/signin'});
     },
     signinLink: function(){
-      this.$router.push({path: '/signin'})
+      this.$router.push({path: '/home'})
     },
     signupLink: function(){
       this.$router.push({path: '/signup'})

@@ -8,7 +8,7 @@
     
       <div class="menu">
         <ul>
-          <router-link to="/" active-class="activated"  tag="li"> 
+          <router-link to="/home" active-class="activated"  tag="li"> 
           <a href>홈</a>
           </router-link>
           <router-link to="/search" active-class="activated" tag="li" >
@@ -27,10 +27,10 @@
               </label>
             </form>   
           </router-link>
-          <router-link to="/" active-class="activated"  tag="li"> 
+          <router-link to="/home" active-class="activated"  tag="li"> 
             <a href>카테고리</a>
           </router-link>
-          <router-link to="/" active-class="activated"  tag="li"> 
+          <router-link to="/home" active-class="activated"  tag="li"> 
             <a href>추천</a>
           </router-link>
           <router-link to="/mypage" active-class="activated" class="mypage"  tag="li"> 
