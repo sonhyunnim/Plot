@@ -15,7 +15,6 @@ export default {
   @import "~config"
   .container
     +container(1190px 12)
-    height: 100vh
   .background
     margin: 0 auto
     margin-top: leading(4)
