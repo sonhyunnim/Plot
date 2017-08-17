@@ -15,15 +15,14 @@
           </div>
           <div class="wrapper">
             <h3>{{ datalist.title }}</h3>
-            <h3>{{ id }}</h3>
             <ul class="information">
               <li>전시 장소: {{ datalist.place }} </li>
-              <li>운영 시간: {{ datalist.time }}</li>
+              <li>운영 시간: {{ datalist.time[0] }} - {{ datalist.time[1] }}</li>
               <li>전시 주최: {{ datalist.author }}</li>
               <li>관람 등급: {{ datalist.grade }}</li>
               <li>전시 장르: {{ datalist.genre }}</li>
               <li>전시 지역: {{ datalist.location }}</li>
-              <li>전시 기간: {{ datalist.duration }}</li>
+              <li>전시 기간: {{ datalist.duration[0] }} - {{ datalist.duration[1] }}</li>
             </ul>
           </div>
           <div class="review">
@@ -166,7 +165,7 @@ export default {
     margin-bottom: 5%
     border-bottom: 1px solid rgb(213, 213, 213)
   .information
-    font-size: 1.2rem
+    font-size: 1.4rem
     line-height: 1.5rem
     color: rgb(147, 147, 156)
   .review

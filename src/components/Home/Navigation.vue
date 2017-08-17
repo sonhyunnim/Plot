@@ -11,29 +11,30 @@
           <router-link to="/home" active-class="activated"  tag="li"> 
           <a href>홈</a>
           </router-link>
-          <router-link to="/search" active-class="activated" tag="li" >
-            <form class="form">
-              <label for="search">
-                <input 
-                id="search-input"
+          <!-- <router-link to="/search" active-class="activated" tag="li" > -->
+          <li>
+            <form class="search-form">
+              <i class="fa fa-search" @click="gotoSearch"></i>
+              <label for="search" class="search-label">
+                <input
+                id="search"
                 type="text"
                 placeholder="Search"
-                :class="{ active: isActive }"
-                @blur="isActive = false">
-                <i 
-                class="fa fa-search" 
-                @click.self="gotoSearch"
-                 ></i>
+                class= "search-input"
+                :class= "{ active: isActive }"
+                @blur="closeSearch"
+                @focus.self="openSearch">
               </label>
-            </form>   
-          </router-link>
-          <router-link to="/home" active-class="activated"  tag="li"> 
+            </form>
+          </li>
+          <!-- </router-link> -->
+          <router-link to="/home" active-class="activated" tag="li">
             <a href>카테고리</a>
           </router-link>
-          <router-link to="/home" active-class="activated"  tag="li"> 
+          <router-link to="/home" active-class="activated" tag="li">
             <a href>추천</a>
           </router-link>
-          <router-link to="/mypage" active-class="activated" class="mypage"  tag="li"> 
+          <router-link to="/mypage" active-class="activated" class="mypage" tag="li"> 
             <a href><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
           </router-link>
         </ul>
@@ -54,9 +55,16 @@ export default {
     // Search
   },
   methods: {
-    gotoSearch(){
+    gotoSearch(e){
+      this.isActive === false ? this.isActive = true : this.isActive = false;
+      
+    },
+    openSearch(){
       this.$router.push( {path: '/search'} )
-
+    },
+    closeSearch(){
+      this.isActive = false
+      this.$router.push( {path: '/home'} )
     }
   }
   
@@ -81,7 +89,7 @@ export default {
     height: leading(2)
     ul
       display: flex
-      justify-content: space-between
+      justify-content: space-around
       li
         line-height: leading(2)
         a
@@ -90,12 +98,29 @@ export default {
           text-decoration: none
           line-height: leading(2)
 
-  input 
-    // display: none
+  .search-form
+    position: relative
+
+  .search-input
+    // background: skyblue
+    display: none
+    position: absolute
+    top: leading(1)/2
+    right: leading(1)
+    height: 3rem
+    border: 2px solid #1e0b65
+
+
   .active
     display: block
+  .fa-search
+    color: #1e0b65
+    font-size: 2rem
+    line-height: leading(2)
+    
   .fa-user-circle-o
     line-height: leading(2)
     font-size: 3rem
+
 
 </style>
