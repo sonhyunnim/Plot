@@ -60,7 +60,11 @@ export default {
         }
       }
     },
-  
+  computed: {
+    signupInfo: function () {
+      return this.$store.getters.getuserInfo
+    }
+  },
  
   methods: {
     facebookLink: function(){
@@ -95,10 +99,7 @@ export default {
         .catch(error => {
           console.log('error.response: ', error.response);
         });
-      //   this.$store.commit('userInfo', {
-      //    userInfo : this.user_input
-        
-      // });
+      
     }
   }
   

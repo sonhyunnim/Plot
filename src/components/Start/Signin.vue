@@ -12,19 +12,25 @@
       </div>
     </form>
     <div class="signin-button-wrapper">
-      <a href class="signin-link" @click.prevent="signinLink">로그인 하기</a>
+      <a href class="signin-link" @click.prevent="signinLink" @click="signIn" >로그인 하기</a>
       <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
-      <a href class="facebook-link" @click.prevent="facebookLink"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
+      <a href class="facebook-link" @click.prevent="facebookLink" @click="fbLogin"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
     </div>
   </div>
 </template>
   
 <script>
 
+
 export default {
+  //  beforeRouteEnter (to, from, next) {
+  //     let token = sessionStorage.getItem('token');
+  //     token && next('home');
+  //     !token && next();
+  //   },
   computed: {
-    userList: function () {
-      return this.$store.getters.getuserInfo
+    signinInfo: function () {
+      return this.$store.getters.setuserInfo
     }
   },
  
@@ -37,7 +43,7 @@ export default {
     
 methods: {
     facebookLink: function(){
-      this.$router.push({path: '/signin'});
+      this.$router.push({path: '/'});
     },
     signinLink: function(){
       this.$router.push({path: '/home'})
@@ -45,11 +51,17 @@ methods: {
     signupLink: function(){
       this.$router.push({path: '/signup'})
     },
-    setUserInfo() {
-        this.$store.commit('userInfo', {
-        "email": this.email,
-        "password": this.password,
+    signIn() {
+      this.$store.dispatch('signIn', {
+        email: this.email,
+        password: this.password
       });
+    },
+    fbLogin() {
+      this.$store.dispatch('fbLogin',{
+        "_this": this, 
+        "_FB" : FB
+      })
     }
   }
   
