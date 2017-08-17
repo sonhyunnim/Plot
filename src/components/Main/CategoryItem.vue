@@ -17,11 +17,11 @@
             <div class="wish-comment">
               <div class="wish">
                 <i class="fa fa-heart" aria-hidden="true"></i>
-                <a href="#">보고싶어요</a>
+                <a href="" @click.prevent="wishCount">보고싶어요</a>
               </div>
               <div class="comment">
                 <i class="fa fa-comment" aria-hidden="true"></i>
-                <a href="#">코멘트쓰기</a>
+                <a href="#" @click.prevent="commentModal">코멘트쓰기</a>
               </div>
             </div>
           </div>
@@ -39,6 +39,11 @@ export default {
       return this.$store.getters.getFilter
     }
   },
+  methods: {
+    wishCount(){
+
+    }
+  }
 }
 </script>
   
