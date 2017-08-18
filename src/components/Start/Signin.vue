@@ -3,19 +3,25 @@
     <h2>로그인</h2>
     <form action="" class="login-page-form">
       <div class="signin-input-group">
-        <label class="signin-email">
-          <input class="input-email" type="email" value placeholder="이메일(example@gmail.com)" required v-model="email">
-        </label>
-        <label class="signin-pw">
-          <input class="input-pw" type="password" value placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" required v-model="password">
-        </label>
+        <label class="signin-email"></label>
+        <input class="input-email" type="email" placeholder="이메일(example@gmail.com)" v-model="email" required>
+        
+        <label class="signin-pw"></label>
+        <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" v-model="password" required>
+        
       </div>
-    </form>
-    <div class="signin-button-wrapper">
-      <a href class="signin-link" @click.prevent="signinLink" @click="signIn" >로그인 하기</a>
-      <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
-      <a href class="facebook-link" @click.prevent="facebookLink" @click="fbLogin"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
-    </div>
+    </form>  
+
+      <div class="signin-button-wrapper">
+        <button 
+        class="signin-link" 
+        type="submit"
+        @click="signIn">로그인 하기</button>
+        <!-- <a href class="signin-link" @click.prevent="signinLink">로그인 하기</a> -->
+        <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
+        <a href class="facebook-link" @click.prevent="facebookLink" @click="fbLogin"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
+      </div>
+    
   </div>
 </template>
   
@@ -23,11 +29,11 @@
 
 
 export default {
-  //  beforeRouteEnter (to, from, next) {
-  //     let token = sessionStorage.getItem('token');
-  //     token && next('home');
-  //     !token && next();
-  //   },
+    // beforeRouteEnter (to, from, next) {
+    //   let token = sessionStorage.getItem('token');
+    //   token && next({name: 'main'});
+    //   !token && next();
+    // },
   computed: {
     signinInfo: function () {
       return this.$store.getters.setuserInfo
@@ -54,7 +60,8 @@ methods: {
     signIn() {
       this.$store.dispatch('signIn', {
         email: this.email,
-        password: this.password
+        password: this.password,
+        _this: this
       });
     },
     fbLogin() {

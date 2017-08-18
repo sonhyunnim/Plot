@@ -3,19 +3,22 @@ import store from '../index'
 
 export default {
   state: {
-    userInfo: {}
-    
+    userInfo: {},
+    errorMessage: ''
   },
   getters:{
-    
     getuserInfo(state) {
       return state.userInfo;
+    },
+    getError(state) {
+      return state.errorMessage;
     }
   },
   mutations: {
-      setUserInfo(state, data){
-        state.userInfo = data;
-      }
+    setUserInfo(state, data){
+      state.userInfo = data;
+    },
+  
   },
   actions: {
     
@@ -31,14 +34,19 @@ export default {
           "password": userInfo.password
         })
         .then(response => {
-          console.log(response.data);
           sessionStorage.setItem('token', response.data.token);
-          sessionStorage.setItem('token', response.data.nickname);
+          console.log(response.data);
           commit('setUserInfo',response.data);
-          // _this.$router.push({path: '/home'});
+          userInfo._this.$router.push({path: '/home'});
         })
-        .catch(error => console.log(error.message));
-      
+        .catch(error => {
+          let data = error.response.data;
+          console.log(data)
+          if(data.error[0]) {
+            alert('이메일/비밀번호를 확인해주세요');
+          }
+        })
+  
       },
     //페이스북 로그인
     fbLogin:  ({commit},userInfo) => {
