@@ -2,10 +2,13 @@
   <div class="background">
     <navigation class="navigation"></navigation>
     <router-view></router-view>
+    <footer-comp></footer-comp>
   </div>
 </template>
 <script>
-import Navigation from './Navigation'
+import Navigation from './Navigation';
+import FooterComp from './FooterComp';
+
 export default {
   data() {
      return {
@@ -13,12 +16,12 @@ export default {
     }
   },
   components: {
-    Navigation
+    Navigation, FooterComp
   }
 }
 </script>
 <style lang="sass">
-
+  @import "~config"
   .navigation
     position: sticky
     top: 0

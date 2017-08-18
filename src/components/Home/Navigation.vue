@@ -2,9 +2,11 @@
 <template>
   <div>
     <div class="header container">
-      <div class="logo">
-        <img src="../../assets/images/logo.svg" alt="">
-      </div>
+      <router-link to="/home" active-class="activated" tag="a">
+        <div class="logo">
+          <img src="../../assets/images/logo.svg" alt="">
+        </div>
+      </router-link>
     
       <div class="menu">
         <ul>

@@ -1,7 +1,7 @@
 <template>
   <div id="banner">
     <banner-carousel>
-      <banner-carousel-item class="carousel-item" v-for="(item,index) in items" key="index" :class="{'is-active':active_index === index-1}">
+      <banner-carousel-item class="carousel-item" :key="index" v-for="(item,index) in items" key="index" :class="{'is-active':active_index === index-1}">
         <img :src="item.src" :alt="item.alt" class="cover">
       </banner-carousel-item>
     </banner-carousel>

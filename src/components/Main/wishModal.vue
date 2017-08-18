@@ -105,12 +105,11 @@ export default {
       color: #999
   .comment-footer
     background: #999
-    height: 20%
 
   .save-comment
     position: absolute
-    bottom: leading(1)/2
-    right: leading(1)/2
+    bottom: leading(1)
+    right: leading(1)
     background: #ffcd1a
     padding: leading(1)/2
     border: none
