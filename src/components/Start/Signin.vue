@@ -4,10 +4,10 @@
     <form action="" class="login-page-form">
       <div class="signin-input-group">
         <label class="signin-email"></label>
-        <input class="input-email" type="email" placeholder="이메일(example@gmail.com)" v-model="email" required>
+        <input class="input-email" type="email" placeholder="이메일(example@gmail.com)" v-model="email" required autofocus>
         
         <label class="signin-pw"></label>
-        <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" v-model="password" required>
+        <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" v-model="password" required autocomplete="off">
         
       </div>
     </form>  
@@ -89,6 +89,8 @@ methods: {
     width: span(9)
     height: leading(2)
     margin-top: leading(1)
+    box-sizing: border-box
+    padding-left: 1rem
   
   .signin-button-wrapper
     margin-top: leading(6)
@@ -108,6 +110,8 @@ methods: {
   .facebook-link
     color: rgb(255, 255, 255)
     text-decoration: none
+    &:hover
+      text-decoration: underline
 
   .fa-facebook-official
     padding-right: 1rem  
