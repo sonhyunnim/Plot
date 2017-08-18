@@ -8,11 +8,21 @@
           <div class="action-info">
             <div class="display-title">{{data.title}}</div>
             <div class="rating">
-              <i class="fa fa-star rating-number1" aria-hidden="true"></i>
-              <i class="fa fa-star rating-number2" aria-hidden="true"></i>
-              <i class="fa fa-star rating-number3" aria-hidden="true"></i>
-              <i class="fa fa-star rating-number4" aria-hidden="true"></i>
-              <i class="fa fa-star rating-number5" aria-hidden="true"></i>
+              <i class="fa fa-star rating-number1" aria-hidden="true"
+                @mouseenter="mouseEnter(index, 1)">
+              </i>
+              <i class="fa fa-star rating-number2" aria-hidden="true"
+                @mouseenter="mouseEnter(index, 2)">
+              </i>
+              <i class="fa fa-star rating-number3" aria-hidden="true"
+                @mouseenter="mouseEnter(index, 3)">
+              </i>
+              <i class="fa fa-star rating-number4" aria-hidden="true"
+                @mouseenter="mouseEnter(index, 4)">
+              </i>
+              <i class="fa fa-star rating-number5" aria-hidden="true"
+                @mouseenter="mouseEnter(index, 5)">
+              </i>
             </div>
             <div class="wish-comment">
               <div class="wish">
@@ -58,11 +68,14 @@ export default {
     openModal(index){
       console.log(index);
       this.$store.commit('setCommentModal', index)
-      
+
     },
     wishCount(index, e){
       console.log(index, e.target);
       this.isActive === index ? this.isActive = '' : this.isActive = index
+    },
+    mouseEnter(index, e){
+      console.log(index, e.target);
     }
   }
 }
