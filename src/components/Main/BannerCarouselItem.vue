@@ -16,7 +16,12 @@ export default {
   computed: {
     is_visible(){
       return this.$parent.active_index === this.index;
-    }
+    },
+    rankingList: function () {
+    console.log(this.$store.getters.getList.slice(0,4))
+    return this.$store.getters.getList.slice(0,4);
+    },
+    
   }
 }
 </script>

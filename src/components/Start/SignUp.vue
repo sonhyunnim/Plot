@@ -10,7 +10,8 @@
           type="text" 
           placeholder="이름(홍길동)" 
           v-model="user_input.username" 
-          required> 
+          required
+          autofocus>
           <p class="error">{{ id_error_msg }}</p>
         
 
@@ -137,14 +138,8 @@ export default {
     },
     signUp() {
         // console.log(this.user_input);
-        let termUse = document.getElementById('signup-service-agreememt'),
-          termInfo = document.getElementById('signup-privacy-agreememt')
-          if(!termUse.classList.contains('agreement') || !termInfo.classList.contains('agreement')){
-            this.term_error_msg = '약관에 동의하여 주세요'
-            this.$refs.agreement.focus();
-            return
-          }
-        console.log();
+        
+    
         let url = this.$store.state.url + '/api/member/signup/';
         this.$http.post(url, {
             username: this.user_input.username,
@@ -169,6 +164,9 @@ export default {
                   this.id_error_msg = '이름을 입력해주세요'
                   refs.username.focus();
                 }
+              }else{
+                this.id_error_msg = ''
+                // refs.username.focus();
               }
 
             if( get_error.email ){
@@ -182,13 +180,27 @@ export default {
                   this.email_error_msg = '이미 가입된 이메일 주소 입니다.'
                   refs.email.focus();
                 }
+            }else{
+              this.email_error_msg = ''
+              refs.email.focus();
+            }
             if( get_error.password ){
                 if( get_error.password[0] === 'This field may not be blank.'){
                   this.pw_error_msg = '비밀번호를 입력해주세요'
                   refs.password.focus();
                 }
-              }
+            }else{
+              this.pw_error_msg = ''
+              refs.password.focus();
             }
+            let termUse = document.getElementById('signup-service-agreememt'),
+               termInfo = document.getElementById('signup-privacy-agreememt')
+            if(!termUse.classList.contains('agreement') || !termInfo.classList.contains('agreement')){
+              this.term_error_msg = '약관에 동의하여 주세요'
+              this.$refs.agreement.focus();
+              return
+            }
+            
         });
       }
     }
@@ -256,6 +268,7 @@ export default {
     text-decoration: none
     &:hover
       text-decoration: underline
+      
 
   .fa-facebook-official
     padding-right: 1rem  

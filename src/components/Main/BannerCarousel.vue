@@ -10,14 +10,14 @@
         <span>2017.7.7 - 2017.10.8</span>
       </div>
       <button type="button" class="carousel-button is-prev" @click="prevItem">
-        <img src="https:icon.now.sh/chevron/13/rgb(30, 11, 101)/left" alt="prev item">
+        <i class="fa fa-chevron-left" aria-hidden="true"alt="prev item"></i>
       </button>
       <button type="button" class="carousel-button is-next" @click="nextItem">
-        <img src="https:icon.now.sh/chevron/13/rgb(30, 11, 101)/right" alt="next item">
+        <i class="fa fa-chevron-right" aria-hidden="true"alt="next item"></i>
       </button>
       <div class="indicators">
-        <a href="" role="tab" @click.prevent="gotoItem(n-1)" v-for="n in items_count" :class="{'is-active':active_index === n-1}">
-          <img :src="activeIndexSrc(n-1)" :alt="activeIndexAlt(n-1)">
+        <a href="" role="tab" @click.prevent="gotoItem(n-1)" :key="n" v-for="n in items_count" :class="{'is-active':active_index === n-1}">
+          <i :class="activeIndexSrc(n-1)" aria-hidden="true"></i>
         </a>
       </div> 
     </div>
@@ -53,13 +53,13 @@ export default {
   },
   methods: {
     activeIndexSrc(n){
-      let path = this.active_index === n ? 'lens' : 'panorama_fish_eye';
-    return `https://icon.now.sh/${path}/10/rgb(30, 11, 101)`;
+      let path = this.active_index === n ? 'fa fa-circle-o' : 'fa fa-circle';
+    return `${path}`;
     },
-    activeIndexAlt(n){
-      let message = this.active_index === n ? 'Current Item' + n : 'Item' + n;
-      return message;
-    },
+    // activeIndexAlt(n){
+    //   let message = this.active_index === n ? 'Current Item' + n : 'Item' + n;
+    //   return message;
+    // },
     prevItem(){
       // console.log('prev item');
       if( --this.active_index < 0) {
