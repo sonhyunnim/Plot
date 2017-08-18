@@ -21,7 +21,6 @@
         <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
         <a href class="facebook-link" @click.prevent="checkLoginState" @click="fbLogin"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
       </div>
-    
   </div>
 </template>
   

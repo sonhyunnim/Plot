@@ -36,7 +36,6 @@ export default {
 <style lang="sass" scoped>
   @import "~config"
   
-  
   .logo
     width: 230px
     padding-top: leading(2)
