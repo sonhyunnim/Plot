@@ -19,7 +19,7 @@
         @click="signIn">로그인 하기</button>
         <!-- <a href class="signin-link" @click.prevent="signinLink">로그인 하기</a> -->
         <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
-        <a href class="facebook-link" @click.prevent="facebookLink" @click="fbLogin"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
+        <a href class="facebook-link" @click.prevent="checkLoginState"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
       </div>
     
   </div>
@@ -27,7 +27,7 @@
   
 <script>
 
-
+import FBActions from '../../utils/FBActions.js';
 export default {
     // beforeRouteEnter (to, from, next) {
     //   let token = sessionStorage.getItem('token');
@@ -48,8 +48,8 @@ export default {
   },
     
 methods: {
-    facebookLink: function(){
-      this.$router.push({path: '/'});
+    checkLoginState(){
+      FBActions.checkLoginState();
     },
     signinLink: function(){
       this.$router.push({path: '/home'})
@@ -63,12 +63,6 @@ methods: {
         password: this.password,
         _this: this
       });
-    },
-    fbLogin() {
-      this.$store.dispatch('fbLogin',{
-        "_this": this, 
-        "_FB" : FB
-      })
     }
   }
   
