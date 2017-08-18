@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-cloak>
+  <div id="category" class="container" v-cloak>
     <h2 class="cg-heading container">카테고리</h2>
     <div class="container categorys">
       <div class="category" :key="index" v-for="(list, index) in cg_lists">

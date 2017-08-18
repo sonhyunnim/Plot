@@ -1,6 +1,6 @@
 <!--Recommand Carousel --> 
 <template>
-  <div class="recommand">
+  <div id="recommand" class="recommand">
     <ul class="rc-items container">
       <li class="rc-item1">item1</li>
       <li class="rc-item2">item2</li>

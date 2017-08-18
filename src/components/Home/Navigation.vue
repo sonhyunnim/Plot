@@ -8,9 +8,7 @@
     
       <div class="menu">
         <ul>
-          <router-link to="/home" active-class="activated"  tag="li"> 
-          <a href>홈</a>
-          </router-link>
+          <li ><a href="#" @click.prevent="scrollCategory('app')">홈</a></li>
           <!-- <router-link to="/search" active-class="activated" tag="li" > -->
           <li>
             <form class="search-form">
@@ -27,13 +25,8 @@
               </label>
             </form>
           </li>
-          <!-- </router-link> -->
-          <router-link to="/home" active-class="activated" tag="li">
-            <a href>카테고리</a>
-          </router-link>
-          <router-link to="/home" active-class="activated" tag="li">
-            <a href>추천</a>
-          </router-link>
+          <li ><a href="#" @click.prevent="scrollCategory('category')">카테고리</a></li>
+          <li ><a href="#" @click.prevent="scrollCategory('recommand')">추천</a></li>
           <router-link to="/mypage" active-class="activated" class="mypage" tag="li"> 
             <a href><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
           </router-link>
@@ -65,6 +58,11 @@ export default {
     closeSearch(){
       this.isActive = false
       this.$router.push( {path: '/home'} )
+    },
+    scrollCategory(id){
+      console.log(this, id);
+      let el = document.getElementById(id);
+      el.scrollIntoView(true);
     }
   }
   

@@ -16,13 +16,14 @@
             </div>
             <div class="wish-comment">
               <div class="wish">
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                <a href="" @click.prevent="wishCount">보고싶어요</a>
+                <i class="fa fa-heart" aria-hidden="true" :class="{'active': index === isActive}"></i>
+                <a href="" @click.prevent="wishCount(index, $event)" :class="{'active': index === isActive}">보고싶어요</a>
               </div>
               <div class="comment">
                 <i class="fa fa-comment" aria-hidden="true"></i>
-                <a href="#" @click.prevent="commentModal">코멘트쓰기</a>
+                <a href="#" @click.prevent="openModal(index)">코멘트쓰기</a>
               </div>
+              <wish-modal v-if="commentModal===index"></wish-modal>
             </div>
           </div>
         </div>
@@ -33,15 +34,35 @@
 </template>
   
 <script>
+import WishModal from './WishModal'
+
 export default {
+
+  data() {
+    return {
+      isActive: []
+    }
+  },
+  components: {
+    WishModal
+  },
   computed: {
     filterList: function () {
       return this.$store.getters.getFilter
+    },
+    commentModal: function () {
+      return this.$store.getters.getCommentModal
     }
   },
   methods: {
-    wishCount(){
-
+    openModal(index){
+      console.log(index);
+      this.$store.commit('setCommentModal', index)
+      
+    },
+    wishCount(index, e){
+      console.log(index, e.target);
+      this.isActive === index ? this.isActive = '' : this.isActive = index
     }
   }
 }
@@ -107,10 +128,16 @@ export default {
     display: flex
     justify-content: space-around
     a
-      text-decoration: none
       color: #333
+      text-decoration: none
+      &.active
+        color: #ff5539
+    i
+      &.active
+        color: #ff5539
   .wish:hover a, .wish:hover .fa-heart
     color: #ff5539
+  
   .comment:hover a, .comment:hover .fa-comment
     color: #5d5df6
   .fa-star
