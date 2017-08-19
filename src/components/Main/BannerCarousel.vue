@@ -2,23 +2,25 @@
   <div class="carousel">
      <slot></slot>
       <div class="information" >
-      <h2>1</h2>
-      <h3>라이프 사진전</h3>
-      <div class="text-sub">
-        <span>예술의 전당</span>
-        <span>한가람 미술관</span>
-        <span>2017.7.7 - 2017.10.8</span>
-      </div>
-      <button type="button" class="carousel-button is-prev" @click="prevItem">
-        <i class="fa fa-chevron-left" aria-hidden="true"alt="prev item"></i>
-      </button>
-      <button type="button" class="carousel-button is-next" @click="nextItem">
-        <i class="fa fa-chevron-right" aria-hidden="true"alt="next item"></i>
-      </button>
-      <div class="indicators">
-        <a href="" role="tab" @click.prevent="gotoItem(n-1)" :key="n" v-for="n in items_count" :class="{'is-active':active_index === n-1}">
-          <i :class="activeIndexSrc(n-1)" aria-hidden="true"></i>
-        </a>
+        <!-- <div class="explain"  v-for="(item,n) in rankingList" :index="n" :key="n"  :class="{'is-active':active_index === n-1}" v-show="is_visible">
+          <h2>{{ item.id+1 }}</h2>
+          <h3>{{ item.title }}</h3>
+          <div class="text-sub">
+            <span>{{item.place}}</span>
+            <span>{{item.location}}</span>
+            <span>{{item.duration[0]}} ~ {{item.duration[1]}}</span>
+          </div>
+        </div> -->
+        <button type="button" class="carousel-button is-prev" @click="prevItem">
+          <i class="fa fa-chevron-left" aria-hidden="true"alt="prev item"></i>
+        </button>
+        <button type="button" class="carousel-button is-next" @click="nextItem">
+          <i class="fa fa-chevron-right" aria-hidden="true"alt="next item"></i>
+        </button>
+        <div class="indicators">
+          <a href="" role="tab" @click.prevent="gotoItem(n-1)" :key="n" v-for="n in items_count" :class="{'is-active':active_index === n-1}">
+            <i :class="activeIndexSrc(n-1)" aria-hidden="true"></i>
+          </a>
       </div> 
     </div>
   </div>
@@ -35,31 +37,38 @@ export default {
   // 각각의 아이템에 인덱스 설정.
   mounted() {
     this.items.forEach((item,i)=> item.index = i);
-    //이미지 로딩, 리사이즈 상태에 따른 컴포넌트 높이 조절
-    // let setHeight = () => this.$el.style.height = this.items[0].$el.getBindingClientRect().height + 'px';
-    // window.addEventListener('DOMContentLoaded', setHeight)
-    // window.addEventListener('resize', setHeight)
+    
   },
   data(){
      return {
        active_index: this.index,
-       items: this.$children 
+       //캐럴셀 아이템 
+       items: this.$children ,
+       
+       
      }
   },
   computed: {
     items_count(){
       return this.items.length;
+    },
+    // is_visible(){
+      
+    //   console.log('this.active_index:',this.active_index)
+    //   console.log('this.index:',this.index)
+    
+    //   return this.active_index === this.index;
+    // },
+     
+    rankingList: function () {
+      return this.$store.getters.getList.slice(0,4);
     }
   },
   methods: {
     activeIndexSrc(n){
-      let path = this.active_index === n ? 'fa fa-circle-o' : 'fa fa-circle';
+      let path = this.active_index === n ? 'fa fa-dot-circle-o' : 'fa fa-circle';
     return `${path}`;
     },
-    // activeIndexAlt(n){
-    //   let message = this.active_index === n ? 'Current Item' + n : 'Item' + n;
-    //   return message;
-    // },
     prevItem(){
       // console.log('prev item');
       if( --this.active_index < 0) {
@@ -74,7 +83,8 @@ export default {
     },
     gotoItem(n){
       this.active_index = n;
-    }
+    },
+    
   }
 }
 </script>
@@ -97,24 +107,24 @@ export default {
       height: 60%
       text-align: right
       padding: 30px
-  h2
-    text-align: left
-    font-size: 2rem
-  h3
-    padding-top: 10px
-    border-top: 1px solid rgb(30, 11, 101)
-    font-size: 2.5rem
-    color: rgb(34, 34, 34)
-    font-weight: bold
-    line-height: leading(2)
-    // background: red
-  .text-sub
-    margin-top: 20% 
-    span
-      display: block
-      margin-top: 3%
-      font-size: 1.4rem
-      // background: blue
+  // h2
+  //   text-align: left
+  //   font-size: 2rem
+  // h3
+  //   // padding-top: 10px
+  //   border-top: 1px solid rgb(30, 11, 101)
+  //   font-size: 1.8rem
+  //   color: rgb(34, 34, 34)
+  //   font-weight: bold
+  //   line-height: leading(2)
+  //   background: red
+  // .text-sub
+  //   margin-top: 20% 
+  //   span
+  //     display: block
+  //     margin-top: 2%
+  //     font-size: 1.4rem
+      
   .carousel-button
     position: absolute
     bottom: 5%
@@ -132,6 +142,7 @@ export default {
     left: 50%
     bottom: 10%
     transform: translateX(-50%)
+
     a 
       margin:
         left: 4px
@@ -139,6 +150,9 @@ export default {
         
       &is-active
         cursor: default 
+  .fa
+    font-size: 1.3rem
+    color: rgb(30, 11, 101)      
         
         
 
