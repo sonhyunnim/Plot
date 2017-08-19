@@ -31,11 +31,11 @@ export default {
   computed:{
     displayHeading: function () {
       let index = this.$store.getters.getCommentModal;
-      return this.$store.getters.getList[index].title;
+      return this.$store.getters.getFilter[index].title;
     },
     displayPoster: function () {
       let index = this.$store.getters.getCommentModal;
-      return this.$store.getters.getList[index].poster_img;
+      return this.$store.getters.getFilter[index].poster_img;
     },
   },
   methods: {

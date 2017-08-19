@@ -51,12 +51,6 @@
 <script>
 
 export default {
-  // beforeCreate(){
-  //   let getList = this.$store.getters.getList;
-  //   this.dataList = getList[this.id];
-  //   console.log(this.dataList);
-  //   console.log(this.dataList.title);
-  // },
   created(){
     let getList = this.$store.getters.getList;
     this.datalist = getList[this.id];

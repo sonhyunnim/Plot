@@ -44,7 +44,7 @@ export default {
     background: #fff
     width: 100%
     height: leading(10)
-    margin-top: leading(4)
+    // margin-top: leading(4)
     border-top: 2px solid #1e0b65
   footer
     +container(1190px 12)

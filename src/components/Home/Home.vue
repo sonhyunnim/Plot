@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <navigation class="navigation"></navigation>
+    <navigation></navigation>
     <router-view></router-view>
     <footer-comp></footer-comp>
   </div>
@@ -22,11 +22,6 @@ export default {
 </script>
 <style lang="sass">
   @import "~config"
-  .navigation
-    position: sticky
-    top: 0
-    // background: #fff
-    z-index: 2000
   .background
     background-image: url(../../assets/images/bg_img.png)
     background-repeat: no-repeat
