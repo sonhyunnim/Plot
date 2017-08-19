@@ -71,33 +71,5 @@ export default {
     
   .signin-link,.signup-link  
     background-color: rgb(30, 11, 101)
-    
-    
-    
-
-  
-  
-
-    
-    
-
-
-  
-
-
-
-    
-    
    
-    
-    
-    
-  
-
-
-
-
-  
-  
-
 </style>

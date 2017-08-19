@@ -1,6 +1,6 @@
 <template>
   <div class="mypage">
-    <div class="user-info">
+    <div class="user-info container">
       <div class="user">
         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
         <span class="user-name">유저 이름</span>
@@ -18,24 +18,28 @@
         <span class="user-display">좋아요 수</span>
       </div>
     </div>
-    <ul>
-      <li>
-        <router-link to="/mypage" active-class="activated" tag="a">
-          보고싶어요
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/mypage/display" active-class="activated"  tag="a"> 
-          봤어요
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/mypage/comments" active-class="activated"  tag="a"> 
-          코멘트
-        </router-link>
-      </li>
-    </ul>
-    <router-view></router-view>
+    <div class="mypage-display">
+      <div class="mypage-display-bg">
+        <ul class="mypage-display-list container">
+          <li>
+            <router-link to="/mypage" active-class="activated" tag="a">
+              보고싶어요
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/mypage/display" active-class="activated" tag="a"> 
+              봤어요
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/mypage/comments" active-class="activated"  tag="a"> 
+              코멘트
+            </router-link>
+          </li>
+        </ul>
+      </div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -43,8 +47,6 @@
 export default {
   data() {
      return {
-
-
     }
   },
   components: {
@@ -53,6 +55,24 @@ export default {
 </script>
 <style lang="sass" scoped>
   @import "~config"
+  .container
+    +container(1190px 12)
+  .user-info
+    // background: red
+    height: leading(10)
+    text-align: center
+  .mypage-display
+    background: #e5e5e5
+  .mypage-display-bg
+    background: #F0F0F0
+    height: leading(2)
+    box-shadow: rgba(0,0,0,0.2) 0 1px 2px
+
+  .mypage-display-list
+    display: flex
+    li
+      +span(1)
+      line-height: leading(2)
 
 
 </style>
