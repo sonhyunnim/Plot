@@ -6,23 +6,32 @@
   </transition>
 </template>
 <script>
+import Item from './BannerCarousel'
 export default {
   name: 'CarouselItem',
+  props:{
+    index: {
+      type: Number,
+      default : 0
+    }
+  },
   data(){
     return {
-      index: 0
+       //index 초기값 설정.
+      // index: 0
     }
   },
   computed: {
     is_visible(){
+      // console.log('this.$parent.active_index:',this.$parent.active_index)
+      // console.log('this.index:',this.index)
+      this.$emit('getIndex',this.index);
       return this.$parent.active_index === this.index;
     },
-    rankingList: function () {
-    console.log(this.$store.getters.getList.slice(0,4))
-    return this.$store.getters.getList.slice(0,4);
-    },
     
-  }
+  },
+  
+
 }
 </script>
 <style lang="sass" scoped>
@@ -39,7 +48,6 @@ export default {
   .fade-enter-active,
   .fade-leave-active
     transition: opacity 0.4s
-
     overflow: hidden
     &is-active
       display: block
