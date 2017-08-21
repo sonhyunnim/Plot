@@ -66,16 +66,16 @@ export default {
   },
   methods: {
     openModal(index){
-      console.log(index);
+      // console.log(index);
       this.$store.commit('setCommentModal', index)
-
+      document.getElementsByTagName("body")[0].style.overflow = "hidden";
     },
     wishCount(index, e){
       console.log(index, e.target);
       this.isActive === index ? this.isActive = '' : this.isActive = index
     },
     mouseEnter(index, e){
-      console.log(index, e.target);
+      // console.log(index, e.target);
     }
   }
 }
