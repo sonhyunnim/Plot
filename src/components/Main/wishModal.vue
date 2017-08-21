@@ -40,7 +40,8 @@ export default {
   },
   methods: {
     closeModal(){
-      this.$store.commit('setCommentModal', false)
+      this.$store.commit('setCommentModal', false);
+      document.getElementsByTagName("body")[0].style.overflow = "";
     }
   }
 }
@@ -55,12 +56,14 @@ export default {
     right: 0
     top: 0
     z-index: 2000
-    // overflow: auto
   .modal-background
+    bottom: 0
+    left: 0
     position: absolute
-    width: 100%
-    height: 100vh
+    right: 0
+    top: 0
     background-color: rgba(10,10,10,.45)
+    // overflow: hidden
   .modal-content
     width: 620px
     height: 50%

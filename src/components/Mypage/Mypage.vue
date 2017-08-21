@@ -56,7 +56,7 @@ export default {
 <style lang="sass" scoped>
   @import "~config"
   .container
-    +container(1190px 12)
+    +container(960px 8)
   .user-info
     // background: red
     height: leading(10)
@@ -71,8 +71,10 @@ export default {
   .mypage-display-list
     display: flex
     li
-      +span(1)
+      +span(1 of 8)
       line-height: leading(2)
+      a
+        text-decoration: none
 
 
 </style>

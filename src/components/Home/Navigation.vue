@@ -90,15 +90,14 @@ export default {
     z-index: 2000
   .logo
     +span(3)
-    height: leading(4)
+    height: leading(3)
     // background: #999
     img
       height: leading(2)
-      margin-top: leading(1)
-      // width: 200%
+      margin-top: leading(1)/2
   .menu
     +span(last 5)
-    margin-top: leading(1)
+    margin-top: leading(1)/2
     height: leading(2)
     ul
       display: flex

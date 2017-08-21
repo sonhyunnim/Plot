@@ -64,6 +64,7 @@ export default {
     openModal(index){
       console.log(index);
       this.$store.commit('setCommentModal', index)
+      document.getElementsByTagName("body")[0].style.overflow = "hidden";
 
     },
     wishCount(index, e){
@@ -80,20 +81,20 @@ export default {
   @import "~config"
   
   .container
-    +container(1190px 12)
+    +container(960px 8)
   [v-cloak]
     display: none
   
   .cg-items
-    +span(12 of 12 nest)
+    +span(8 of 8 nest)
     margin-bottom: leading(2)
     li
-      +span(2 of 10 .17)
+      +span(2 of 8)
       background: #1e0b65
       margin-top: leading(2)
       position: relative
       overflow: hidden
-      padding-top: 27%
+      padding-top: 32%
       border-radius: 3px
       &:hover .action-wrapper
         opacity: 1
