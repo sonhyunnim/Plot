@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <ul class="cg-items container">
-      <li :key="index" v-for="(data, index) in filterList">
+      <li :key="index" v-for="(data, index) in likeList">
         <img  :src="data.poster_img" alt="전시 포스터 이미지">
         <div class="action-wrapper">
           <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link"></router-link>
@@ -44,6 +44,9 @@
 <script>
 import WishModal from '../Main/WishModal'
 export default {
+  created(){
+    this.$store.dispatch('likeList', 'https://plot-b2239.firebaseio.com/user.json');
+  },
   data() {
     return {
       isActive: []
@@ -53,8 +56,8 @@ export default {
     WishModal
   },
   computed: {
-    filterList: function () {
-      return this.$store.getters.getFilter
+    likeList: function () {
+      return this.$store.getters.getLikeList
     },
     commentModal: function () {
       return this.$store.getters.getCommentModal

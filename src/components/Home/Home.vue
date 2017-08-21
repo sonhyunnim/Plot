@@ -22,7 +22,7 @@ export default {
   },
   components: {
     Navigation, FooterComp
-  }
+  },
 }
 </script>
 <style lang="sass">
