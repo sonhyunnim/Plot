@@ -29,14 +29,6 @@ function appInit() {
   // const router = assignRouterBind();
   assignAxiosBind();
   assignFBInit();
-  
-  new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(App)
-  });
-
 }
 
 function assignAxiosBind(){

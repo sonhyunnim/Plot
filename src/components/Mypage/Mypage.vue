@@ -57,10 +57,31 @@ export default {
   @import "~config"
   .container
     +container(960px 8)
-  .user-info
-    // background: red
-    height: leading(10)
     text-align: center
+  .user-info
+    height: leading(10)
+    color: #403f4e
+    div
+      position: relative
+      top: 50%
+      // left: 50%
+      transform: translateY(-50%)
+  .user
+    +span(8 of 8)
+    display: flex
+    flex-direction: column
+    text-align: center
+    i
+      font-size: 7rem
+      margin-bottom: leading(1)/2
+
+  .user-display-count, .user-like-count
+    +span(2 of 8)
+    display: flex
+    flex-direction: column
+  .user-display-count
+    +push(2 of 8)
+
   .mypage-display
     background: #e5e5e5
   .mypage-display-bg
@@ -73,8 +94,26 @@ export default {
     li
       +span(1 of 8)
       line-height: leading(2)
+      position: relative
+      // background: red
+      &::after
+        content: ''
+        position: absolute
+        left: 50%
+        right: 50%
+        bottom: 0
+        transition: all 0.5s
+      &:hover::after
+        border-bottom: 3px solid #1e0b65
+        left: 0
+        right: 0
+
       a
+        color: #6d6c83
         text-decoration: none
+        font: bold 1.6rem "Noto Sans kr", sans-serif
+        width: 100%
+        height: 100%
 
 
 </style>
