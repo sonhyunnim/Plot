@@ -47,11 +47,9 @@ export default {
     opacity: 0
   .fade-enter-active,
   .fade-leave-active
-    transition: opacity 0.4s
-    overflow: hidden
-    &is-active
-      display: block
-      overflow: hidden
+    transition: opacity 3s 
+    
+    
 
   
     

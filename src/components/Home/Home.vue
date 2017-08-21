@@ -10,6 +10,11 @@ import Navigation from './Navigation';
 import FooterComp from './FooterComp';
 
 export default {
+  // beforeRouteEnter (to, from, next) {
+  //   let token = sessionStorage.getItem('token');
+  //   token && next();
+  //   !token && next({name: 'start'});
+  // },
   data() {
      return {
 

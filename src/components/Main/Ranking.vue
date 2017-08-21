@@ -6,9 +6,9 @@
         <i class="fa fa-caret-down" aria-hidden="true"></i>
         실시간 전시 랭킹
       </h2>
-      <ul class="ranking-list">
-        <li :key="index" v-for="(data, index) in rankingList">
-          <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link">
+      <transition-group name="ranking" tag="ul" class="ranking-list">
+        <li :key="index" v-for="(data, index) in rankingList" @mouseover="showRanking()">
+          <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" :class="{active:isActive}">
             {{++index+'.'+' '+data.title}}
           </router-link>
         </li>
@@ -17,20 +17,38 @@
         <li><a href="#">3. 어둠속의 대화</a></li>
         <li><a href="#">4. 즐거운 나의 집</a></li>
         <li><a href="#">5. 라이프 사진전</a></li> -->
-      </ul>
+      </transition-group >
     </div>
   </div>
 </template>
 <script>
 export default {
-  data() {
-     return {
-    }
+  mounted(){
+    this.isActive();
   },
+  
   computed: {
     rankingList: function () {
       return this.$store.getters.getList.slice(0,5);
     },
+  data(){
+    return {
+      isActive: true
+    }
+  }  
+  },
+  methods: {
+      isActive() {
+        
+        setInterval(
+        // console.log('랭킹리스트');
+        
+        this.showRanking,
+        
+        
+          
+        3000);
+    }
   }
 }
 </script>
@@ -72,6 +90,8 @@ export default {
       color: #fff
       display: inline-block
       width: 100%
+      active  
+      // transform: translateY(-45px)
       &:hover
         background: #fff
         border: 2px solid #1e0b65

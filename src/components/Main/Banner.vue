@@ -2,16 +2,8 @@
   <div id="banner">
     <banner-carousel>
       <banner-carousel-item class="carousel-item" v-for="(item,index) in rankingList":index="index" :key="index" >
-        <img :src="item.thumbnail_img[1]" :alt="item.alt" class="cover">
-          <div class="explain">
-          <h2>{{ item.id+1 }}</h2>
-          <h3>{{ item.title }}</h3>
-          <div class="text-sub">
-            <span class="place">{{item.place}}</span>
-            <span>{{item.location}}</span>
-            <span>{{item.duration[0]}} - {{item.duration[1]}}</span>
-          </div>
-        </div>
+        <img :src="item.thumbnail_img[0]" :alt="item.alt" class="cover">
+        
       </banner-carousel-item>
     </banner-carousel>
   </div>
@@ -74,39 +66,7 @@ export default {
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-  .explain 
-    position: relative
-    left: 65%
-    top:  leading(6)
-    width: 23%
-    height: 60%  
-    z-index: 1000
-    text-align: right
-    padding: 0 2%
-  h2
-    text-align: left
-    font-size: 2rem
-    margin-bottom: 2%
-  h3
-    // padding-top: 10px
-    border-top: 1px solid rgb(30, 11, 101)
-    font-size: 1.8rem
-    color: rgb(34, 34, 34)
-    font-weight: bold
-    line-height: leading(2)
-  
-  .text-sub
-    position: absolute
-    margin-top: 15% 
-    width: 50%
-    // text-align: right
-    right: 10%
-  span
-    display: block
-    margin-top: 2%
-    font-size: 1.4rem
-  .place  
-    // word-break: keep-all
+ 
  
   
   

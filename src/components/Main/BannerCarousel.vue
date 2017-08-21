@@ -2,7 +2,7 @@
   <div class="carousel">
      <slot></slot>
       <div class="information" >
-        <!-- <div class="explain"  v-for="(item,n) in rankingList" :index="n" :key="n"  :class="{'is-active':active_index === n-1}" v-show="is_visible">
+        <div class="explain"  @click.prevent="gotoItem(n-1)"  v-for="(item,n) in rankingList" :index="n" :key="n"  :class="{'is-active':active_index === n-1}" v-show="is_visible(n)">
           <h2>{{ item.id+1 }}</h2>
           <h3>{{ item.title }}</h3>
           <div class="text-sub">
@@ -10,7 +10,7 @@
             <span>{{item.location}}</span>
             <span>{{item.duration[0]}} ~ {{item.duration[1]}}</span>
           </div>
-        </div> -->
+        </div>
         <button type="button" class="carousel-button is-prev" @click="prevItem">
           <i class="fa fa-chevron-left" aria-hidden="true"alt="prev item"></i>
         </button>
@@ -18,7 +18,7 @@
           <i class="fa fa-chevron-right" aria-hidden="true"alt="next item"></i>
         </button>
         <div class="indicators">
-          <a href="" role="tab" @click.prevent="gotoItem(n-1)" :key="n" v-for="n in items_count" :class="{'is-active':active_index === n-1}">
+          <a href="" role="tab" @click.prevent="gotoItem(n-1)" :key="n" v-for="n in items_count" :class="{'is-active':active_index === n-1}" @clickr="Timer">  
             <i :class="activeIndexSrc(n-1)" aria-hidden="true"></i>
           </a>
       </div> 
@@ -37,7 +37,7 @@ export default {
   // 각각의 아이템에 인덱스 설정.
   mounted() {
     this.items.forEach((item,i)=> item.index = i);
-    
+    this.Timer();
   },
   data(){
      return {
@@ -52,21 +52,17 @@ export default {
     items_count(){
       return this.items.length;
     },
-    // is_visible(){
-      
-    //   console.log('this.active_index:',this.active_index)
-    //   console.log('this.index:',this.index)
-    
-    //   return this.active_index === this.index;
-    // },
-     
     rankingList: function () {
       return this.$store.getters.getList.slice(0,4);
     }
   },
   methods: {
+    Timer(){
+      setInterval(this.nextItem, 3000);
+      // console.log('timer')
+    },
     activeIndexSrc(n){
-      let path = this.active_index === n ? 'fa fa-dot-circle-o' : 'fa fa-circle';
+      let path = this.active_index === n ? 'fa fa-circle-o' : 'fa fa-circle';
     return `${path}`;
     },
     prevItem(){
@@ -80,9 +76,15 @@ export default {
       if( ++this.active_index >= this.items_count) {
         this.active_index = 0;
       }
-    },
+  },
     gotoItem(n){
       this.active_index = n;
+    },
+    is_visible(n){
+      this.item= n;
+      // console.log('this.active_index:',this.active_index)
+      return this.active_index === this.item;
+      
     },
     
   }
@@ -107,24 +109,28 @@ export default {
       height: 60%
       text-align: right
       padding: 30px
-  // h2
-  //   text-align: left
-  //   font-size: 2rem
-  // h3
-  //   // padding-top: 10px
-  //   border-top: 1px solid rgb(30, 11, 101)
-  //   font-size: 1.8rem
-  //   color: rgb(34, 34, 34)
-  //   font-weight: bold
-  //   line-height: leading(2)
-  //   background: red
-  // .text-sub
-  //   margin-top: 20% 
-  //   span
-  //     display: block
-  //     margin-top: 2%
-  //     font-size: 1.4rem
-      
+  h2
+    text-align: left
+    font-size: 2rem
+  h3
+    // padding-top: 10px
+    border-top: 1px solid rgb(30, 11, 101)
+    font-size: 1.8rem
+    color: rgb(34, 34, 34)
+    font-weight: bold
+    line-height: leading(2)
+  
+  .text-sub
+    margin-top: 10% 
+    text-align: right
+    width: 50%
+    position: absolute
+    right: 10%
+    
+    span
+      display: block
+      // margin-top: 2%
+      font-size: 1.4rem
   .carousel-button
     position: absolute
     bottom: 5%
@@ -150,6 +156,7 @@ export default {
         
       &is-active
         cursor: default 
+        
   .fa
     font-size: 1.3rem
     color: rgb(30, 11, 101)      
