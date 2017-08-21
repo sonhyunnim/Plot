@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     Timer(){
-      setInterval(this.nextItem, 3000);
+      setInterval(this.nextItem, 4000);
       // console.log('timer')
     },
     activeIndexSrc(n){

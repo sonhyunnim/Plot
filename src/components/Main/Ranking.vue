@@ -6,50 +6,56 @@
         <i class="fa fa-caret-down" aria-hidden="true"></i>
         실시간 전시 랭킹
       </h2>
-      <transition-group name="ranking" tag="ul" class="ranking-list">
-        <li :key="index" v-for="(data, index) in rankingList" @mouseover="showRanking()">
-          <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" :class="{active:isActive}">
-            {{++index+'.'+' '+data.title}}
-          </router-link>
-        </li>
-        <!-- <li><a href="#">1. 픽사 애니메이션 30주년 특별전</a></li>
-        <li><a href="#">2. 이상한 나라의 앨리스</a></li>
-        <li><a href="#">3. 어둠속의 대화</a></li>
-        <li><a href="#">4. 즐거운 나의 집</a></li>
-        <li><a href="#">5. 라이프 사진전</a></li> -->
-      </transition-group >
+        <ranking-item>
+          <ul tag="ul" class="ranking-list" @click="showRanking">
+            <li :key="index" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1}" @click="nextItem" >
+              <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" >
+                {{++index+'.'+' '+data.title}}
+              </router-link>
+            </li>
+          </ul >
+        </ranking-item>
     </div>
   </div>
 </template>
 <script>
+import RankingItem from './RankingItem'
 export default {
   mounted(){
-    this.isActive();
+    this.showRanking();
   },
-  
-  computed: {
-    rankingList: function () {
-      return this.$store.getters.getList.slice(0,5);
-    },
+  components: {
+    RankingItem
+  },
   data(){
     return {
-      isActive: true
-    }
-  }  
+      active_index : null,
+      // items : this.$children
+    }  
+  },
+  computed: {
+    rankingList() {
+      return this.$store.getters.getList.slice(0,5);
+    },
+    
+    
   },
   methods: {
-      isActive() {
-        
-        setInterval(
-        // console.log('랭킹리스트');
-        
-        this.showRanking,
-        
-        
-          
-        3000);
+    nextItem(index) {
+      let active_index = this.index
+      if( ++this.active_index >= this.rankingList.length) {
+        this.active_index = 0;
+      }
+      // console.log('this.active_index',this.active_index)
+      // console.log('this.rankingList',this.rankingList)
+      // console.log('showcurrent')
+    },
+    showRanking(){
+      setInterval(this.nextItem,3000);
+      
     }
   }
+  
 }
 </script>
 <style lang="sass" scoped>
@@ -90,8 +96,8 @@ export default {
       color: #fff
       display: inline-block
       width: 100%
-      active  
-      // transform: translateY(-45px)
+      .is-active  
+        transform: translateY(-45px)
       &:hover
         background: #fff
         border: 2px solid #1e0b65
