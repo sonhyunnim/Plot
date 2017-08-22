@@ -40,14 +40,14 @@ export default {
 <style lang="sass" scoped>
   @import "~config"
 
-  html 
-    font-size: 10px
-    background: #fff
-    // box-sizing: border-box
-    +global-box-sizing(border-box)
-  body
-    margin: 0
-    font-size: 1.6rem
+  // html 
+  //   font-size: 10px
+  //   background: #fff
+  //   // box-sizing: border-box
+  //   +global-box-sizing(border-box)
+  // body
+  //   margin: 0
+  //   font-size: 1.6rem
 
   #banner
     // +container(1190px 12)
@@ -61,7 +61,7 @@ export default {
 
   .cover
     position: absolute
-    width: 90%
+    width: 100%
     height: auto
     top: 50%
     left: 50%
