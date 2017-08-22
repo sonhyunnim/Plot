@@ -3,17 +3,17 @@
     <div class="user-info container">
       <div class="user">
         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-        <span class="user-name">유저 이름</span>
+        <span class="user-name">{{userInfo.nick_name}}</span>
       </div>
       <div class="user-display-count">
         <span class="display-count">
-          <i class="fa fa-eye" aria-hidden="true">21</i>
+          <i class="fa fa-eye" aria-hidden="true">11</i>
         </span>
         <span class="user-display">내가 본 전시</span>
       </div>
       <div class="user-like-count">
         <span class="display-count">
-          <i class="fa fa-heart" aria-hidden="true">14</i>
+          <i class="fa fa-heart" aria-hidden="true">6</i>
         </span>
         <span class="user-display">좋아요 수</span>
       </div>
@@ -45,11 +45,20 @@
 
 <script>
 export default {
+  
   data() {
      return {
     }
   },
   components: {
+  },
+  computed: {
+    userInfo: function () {
+      return this.$store.getters.getuserInfo
+    },
+    mypageUser: function () {
+      return this.$store.getters.getMypageUser
+    }
   }
 }
 </script>

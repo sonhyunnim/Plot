@@ -89,7 +89,7 @@ export default {
     top: 0
     z-index: 2000
   .logo
-    +span(3)
+    +span(2)
     height: leading(3)
     // background: #999
     img

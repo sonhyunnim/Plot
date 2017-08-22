@@ -15,6 +15,10 @@ export default {
   //   token && next();
   //   !token && next({name: 'start'});
   // },
+  created(){
+    this.$store.dispatch('likeList', 'https://plot-b2239.firebaseio.com/user.json');
+    this.$store.dispatch('mypageUser', 'https://plot-b2239.firebaseio.com/user.json');
+  },
   data() {
      return {
 
