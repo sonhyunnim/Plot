@@ -111,7 +111,7 @@ export default {
         left: 50%
         right: 50%
         bottom: 0
-        transition: all 0.5s
+        transition: all 0.3s
       &:hover::after
         border-bottom: 3px solid #1e0b65
         left: 0

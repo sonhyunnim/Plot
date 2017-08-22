@@ -1,6 +1,6 @@
 <!--Search -->
 <template>
-    <div id="navigation" :style="{background: isScroll}">
+    <div id="navigation" :style="isScroll">
       <div class="header container">
         <router-link to="/home" active-class="activated" tag="a">
           <div class="logo">
@@ -52,7 +52,10 @@ export default {
       let navHeight = document.getElementById('navigation').scrollHeight;
       window.onscroll = () => { 
         if(!this.isScroll && (window.scrollY > navHeight)){
-          this.isScroll = '#fff';
+          this.isScroll = {
+                          background: '#fff',
+                          boxShadow: 'rgba(0,0,0,0.2) 0 1px 3px'
+                          }
         }
         else if(this.isScroll && (window.scrollY < navHeight)){
           this.isScroll = '';
