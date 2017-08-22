@@ -8,32 +8,32 @@
           <div class="action-info">
             <div class="display-title">{{data.title}}</div>
             <div class="rating">
-              <i class="fa fa-star rating-number1" aria-hidden="true"
-                @mouseenter="mouseEnter(index, 1)">
+              <i class="fa fa-star rating-number1" :class="{'hover': index === isHover}" aria-hidden="true"
+                @mouseenter="mouseEnter(index, $event)">
               </i>
-              <i class="fa fa-star rating-number2" aria-hidden="true"
+              <i class="fa fa-star rating-number2" :class="{'hover': index === isHover}" aria-hidden="true"
                 @mouseenter="mouseEnter(index, 2)">
               </i>
-              <i class="fa fa-star rating-number3" aria-hidden="true"
+              <i class="fa fa-star rating-number3" :class="{'hover': index === isHover}" aria-hidden="true"
                 @mouseenter="mouseEnter(index, 3)">
               </i>
-              <i class="fa fa-star rating-number4" aria-hidden="true"
+              <i class="fa fa-star rating-number4" :class="{'hover': index === isHover}" aria-hidden="true"
                 @mouseenter="mouseEnter(index, 4)">
               </i>
-              <i class="fa fa-star rating-number5" aria-hidden="true"
+              <i class="fa fa-star rating-number5" :class="{'hover': index === isHover}" aria-hidden="true"
                 @mouseenter="mouseEnter(index, 5)">
               </i>
             </div>
             <div class="wish-comment">
               <div class="wish">
-                <i class="fa fa-heart" aria-hidden="true" :class="{'active': likeList}"></i>
-                <a href="" @click.prevent="wishCount(index, $event)" :class="{'active': likeList}">보고싶어요</a>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <a href="" @click.prevent="wishCount(index, $event)">보고싶어요</a>
               </div>
               <div class="comment">
                 <i class="fa fa-comment" aria-hidden="true"></i>
                 <a href="#" @click.prevent="openModal(data.id)">코멘트쓰기</a>
               </div>
-              <wish-modal v-if="commentModal===data.id"></wish-modal>
+              <comment-modal v-if="commentModal===data.id"></comment-modal>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
 </template>
   
 <script>
-import WishModal from './WishModal'
+import CommentModal from './CommentModal'
 
 export default {
   created(){
@@ -56,11 +56,12 @@ export default {
   },
   data() {
     return {
-      isActive: []
+      isActive: [],
+      isHover: ''
     }
   },
   components: {
-    WishModal
+    CommentModal
   },
   computed: {
     filterList: function () {
@@ -68,9 +69,6 @@ export default {
     },
     commentModal: function () {
       return this.$store.getters.getCommentModal
-    },
-    likeList: function () {
-      
     }
   },
   methods: {
@@ -80,24 +78,23 @@ export default {
       document.getElementsByTagName("body")[0].style.overflow = "hidden";
     },
     wishCount(index, e){
-      if (this.isActive === index) {
-        this.isActive = ''
-      }else{
-        // this.isActive.push(index)
-        window.alert('"보고싶어요"에 추가되었습니다.')
-        this.$http.get('https://plot-b2239.firebaseio.com/user/like.json')
+      e.target.style.color = "#ff5539";
+      e.target.parentNode.firstChild.style.color = "#ff5539";
+
+      window.alert('"보고싶어요"에 추가되었습니다.')
+      this.$http.get('https://plot-b2239.firebaseio.com/user/like.json')
+                .then(response => {
+                  response.data.push(index);
+                  this.$http.put('https://plot-b2239.firebaseio.com/user/like.json', response.data)
                   .then(response => {
-                    response.data.push(index);
-                    this.$http.put('https://plot-b2239.firebaseio.com/user/like.json', response.data)
-                    .then(response => {
-                      this.$store.commit('likeList', response.data);
-                    })
+                    this.$store.commit('likeList', response.data);
                   })
-                  .catch(error => console.log(error.message));
-      }
+                })
+                .catch(error => console.log(error.message));
     },
     mouseEnter(index, e){
-      // console.log(index, e.target);
+      console.log(index, e.target);
+      // this.isHover = index;
     }
   }
 }
@@ -178,8 +175,8 @@ export default {
   .fa-star
     color: #999
     font-size: 2.5rem
-    &:hover
-      color: rgb(255, 205, 26)
+  .hover
+    color: rgb(255, 205, 26)
   .fa-heart, .fa-comment
     color: #999
 
