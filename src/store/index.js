@@ -7,7 +7,6 @@ Vue.use(Vuex);
 import display from './modules/display';
 import user from './modules/user';
 import viewstate from './modules/viewstate';
-// import mypage from './modules/mypage';
 
 export default new Vuex.Store({
   

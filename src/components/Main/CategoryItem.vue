@@ -47,13 +47,6 @@
 import CommentModal from './CommentModal'
 
 export default {
-  created(){
-    this.$http.get('https://plot-b2239.firebaseio.com/user.json')
-              .then(response => {
-                this.isActive = response.data.like;
-              })
-              .catch(error => console.log(error.message));
-  },
   data() {
     return {
       isActive: [],
@@ -81,12 +74,12 @@ export default {
       e.target.style.color = "#ff5539";
       e.target.parentNode.firstChild.style.color = "#ff5539";
 
-      window.alert('"보고싶어요"에 추가되었습니다.')
       this.$http.get('https://plot-b2239.firebaseio.com/user/like.json')
                 .then(response => {
                   response.data.push(index);
                   this.$http.put('https://plot-b2239.firebaseio.com/user/like.json', response.data)
                   .then(response => {
+                    window.alert('"보고싶어요"에 추가되었습니다.')
                     this.$store.commit('likeList', response.data);
                   })
                 })
