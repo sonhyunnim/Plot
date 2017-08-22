@@ -2,7 +2,7 @@
   <div class="carousel">
     <slot></slot>
       <div class="information" >
-        <div class="explain"  @click.prevent="gotoItem(n-1)"  v-for="(item,n) in rankingList" :index="n" :key="n"  :class="{'is-active':active_index === n-1}" v-show="is_visible(n)">
+        <div class="explain"   v-for="(item,n) in rankingList" :index="n" :key="n"  :class="{'is-active':active_index === n-1}" v-show="is_visible(n)">
           <h2>{{ item.id+1 }}</h2>
           <h3>{{ item.title }}</h3>
           <div class="text-sub">
@@ -11,10 +11,10 @@
             <span>{{item.duration[0]}} ~ {{item.duration[1]}}</span>
           </div>
         </div>
-        <button type="button" class="carousel-button is-prev" @click="prevItem">
+        <button type="button" class="carousel-button is-prev" @click.prevent="prevItem">
           <i class="fa fa-chevron-left" aria-hidden="true"alt="prev item"></i>
         </button>
-        <button type="button" class="carousel-button is-next" @click="nextItem">
+        <button type="button" class="carousel-button is-next" @click.prevent="nextItem">
           <i class="fa fa-chevron-right" aria-hidden="true"alt="next item"></i>
         </button>
         <div class="indicators">
