@@ -4,7 +4,8 @@ import store from '../index'
 export default {
   state: {
     userInfo: {},
-    errorMessage: ''
+    errorMessage: '',
+    mypageUser: {},
   },
   getters:{
     getuserInfo(state) {
@@ -12,13 +13,18 @@ export default {
     },
     getError(state) {
       return state.errorMessage;
+    },
+    getMypageUser(state) {
+      return state.mypageUser
     }
   },
   mutations: {
     setUserInfo(state, data){
       state.userInfo = data;
     },
-  
+    mypageUser(state, data){
+      state.mypageUser = data;
+    }
   },
   actions: {
     
@@ -58,7 +64,15 @@ export default {
           console.log(respose.data);
         })
         .catch(error => console.log(error.message));
+    },
+    mypageUser: ({commit}, path) => {
+      axios
+        .get(path)
+        .then(response => {
+          commit('mypageUser', response.data);
+        })
+        .catch(error => console.log(error.message));
     }
-  }
 
+  }
 }

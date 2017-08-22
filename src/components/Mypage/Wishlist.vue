@@ -31,9 +31,9 @@
               </div>
               <div class="comment">
                 <i class="fa fa-comment" aria-hidden="true"></i>
-                <a href="#" @click.prevent="openModal(index)">코멘트쓰기</a>
+                <a href="#" @click.prevent="openModal(data.id)">코멘트쓰기</a>
               </div>
-              <wish-modal v-if="commentModal===index"></wish-modal>
+              <wish-modal v-if="commentModal===data.id"></wish-modal>
             </div>
           </div>
         </div>
@@ -44,9 +44,7 @@
 <script>
 import WishModal from '../Main/WishModal'
 export default {
-  created(){
-    this.$store.dispatch('likeList', 'https://plot-b2239.firebaseio.com/user.json');
-  },
+  
   data() {
     return {
       isActive: []
@@ -71,11 +69,24 @@ export default {
 
     },
     wishCount(index, e){
-      console.log(index, e.target);
-      this.isActive === index ? this.isActive = '' : this.isActive = index
+      if (this.isActive === index) {
+        this.isActive = ''
+      }else{
+        this.isActive = index
+        window.alert('"보고싶어요"에 추가되었습니다.')
+        this.$http.get('https://plot-b2239.firebaseio.com/user/like.json')
+                  .then(response => {
+                    response.data.push(index);
+                    this.$http.put('https://plot-b2239.firebaseio.com/user/like.json', response.data)
+                    .then(response => {
+                      this.$store.commit('likeList', response.data);
+                    })
+                  })
+                  .catch(error => console.log(error.message));
+      }
     },
     mouseEnter(index, e){
-      console.log(index, e.target);
+      // console.log(index, e.target);
     }
   }
 }
@@ -141,12 +152,8 @@ export default {
     a
       color: #333
       text-decoration: none
-      &.active
-        color: #ff5539
-    i
-      &.active
-        color: #ff5539
-  .wish:hover a, .wish:hover .fa-heart
+
+  .wish a, .wish .fa-heart
     color: #ff5539
   
   .comment:hover a, .comment:hover .fa-comment

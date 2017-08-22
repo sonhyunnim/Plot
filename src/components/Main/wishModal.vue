@@ -31,11 +31,11 @@ export default {
   computed:{
     displayHeading: function () {
       let index = this.$store.getters.getCommentModal;
-      return this.$store.getters.getFilter[index].title;
+      return this.$store.getters.getList[index].title;
     },
     displayPoster: function () {
       let index = this.$store.getters.getCommentModal;
-      return this.$store.getters.getFilter[index].poster_img;
+      return this.$store.getters.getList[index].poster_img;
     },
   },
   methods: {
@@ -66,7 +66,7 @@ export default {
     // overflow: hidden
   .modal-content
     width: 620px
-    height: 50%
+    height: 45%
     position: relative
     top: 50%
     left: 50%
