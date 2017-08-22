@@ -6,15 +6,15 @@
         <i class="fa fa-caret-down" aria-hidden="true"></i>
         실시간 전시 랭킹
       </h2>
-        <ranking-item>
-          <ul tag="ul" class="ranking-list" @click="showRanking">
-            <li :key="index" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1}" @click="nextItem" >
-              <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" >
-                {{++index+'.'+' '+data.title}}
-              </router-link>
-            </li>
-          </ul >
-        </ranking-item>
+      <ranking-item>
+        <ul tag="ul" class="ranking-list">
+          <li :key="index,data" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1}" @mouseleave.prevent="showCurrent()">
+            <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" @click="nextItem" >
+              {{++index+'.'+' '+data.title}}
+            </router-link>
+          </li>
+        </ul >
+      </ranking-item>
     </div>
   </div>
 </template>
@@ -22,15 +22,17 @@
 import RankingItem from './RankingItem'
 export default {
   mounted(){
-    this.showRanking();
+    this.showCurrent();
   },
   components: {
     RankingItem
   },
   data(){
     return {
-      active_index : null,
+      active_index :  true,
+      // item: null
       // items : this.$children
+      
     }  
   },
   computed: {
@@ -42,20 +44,32 @@ export default {
   },
   methods: {
     nextItem(index) {
+    
       let active_index = this.index
-      if( ++this.active_index >= this.rankingList.length) {
+      
+      if( this.active_index++ >= this.rankingList.length-1) {
         this.active_index = 0;
       }
-      // console.log('this.active_index',this.active_index)
-      // console.log('this.rankingList',this.rankingList)
-      // console.log('showcurrent')
+      // console.log('INDEX:',this.rankingList.length)
+      // console.log('ACTIVE_INDEX:',this.active_index)
+      
+      // console.log('nextitem')
+    },
+    showCurrent(){
+      setInterval(this.nextItem,2000);
+      
+      
     },
     showRanking(){
-      setInterval(this.nextItem,3000);
-      
+      // let stop = setInterval(this.nextItem,2000);
+      // console.log('STOP:',stop)
+      // clearInterval(stop)
+      let ul = document.querySelector('.ranking-list');
+      let li = ul.querySelectorAll('li')
+      console.log(ul)
+      console.log(li)
     }
   }
-  
 }
 </script>
 <style lang="sass" scoped>
@@ -71,6 +85,7 @@ export default {
     +span(3 last)
     &:hover .ranking-list
       height: auto
+      position: static
 
   .ranking-heading
     font: bold 2rem "Noto Sans kr", sans-serif
@@ -89,6 +104,14 @@ export default {
     position: absolute
     overflow: hidden
     height: leading(2)
+    position: relative
+    .is-active  
+      background: #1e0b65
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0 
+      right: 0
     a
       text-decoration: none
       line-height: leading(1)
@@ -96,8 +119,7 @@ export default {
       color: #fff
       display: inline-block
       width: 100%
-      .is-active  
-        transform: translateY(-45px)
+      
       &:hover
         background: #fff
         border: 2px solid #1e0b65

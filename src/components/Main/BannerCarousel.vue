@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-     <slot></slot>
+    <slot></slot>
       <div class="information" >
         <div class="explain"  @click.prevent="gotoItem(n-1)"  v-for="(item,n) in rankingList" :index="n" :key="n"  :class="{'is-active':active_index === n-1}" v-show="is_visible(n)">
           <h2>{{ item.id+1 }}</h2>
@@ -21,9 +21,9 @@
           <a href="" role="tab" @click.prevent="gotoItem(n-1)" :key="n" v-for="n in items_count" :class="{'is-active':active_index === n-1}" @clickr="Timer">  
             <i :class="activeIndexSrc(n-1)" aria-hidden="true"></i>
           </a>
-      </div> 
-    </div>
-  </div>
+        </div> 
+      </div>
+   </div>
 </template>
 <script>
 export default {
