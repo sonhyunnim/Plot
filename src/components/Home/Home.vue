@@ -18,6 +18,7 @@ export default {
   created(){
     this.$store.dispatch('likeList', 'https://plot-b2239.firebaseio.com/user.json');
     this.$store.dispatch('mypageUser', 'https://plot-b2239.firebaseio.com/user.json');
+    this.$store.dispatch('commentList', 'https://plot-b2239.firebaseio.com/user/comments.json');
   },
   data() {
      return {

@@ -6,6 +6,7 @@ export default {
     userInfo: {},
     errorMessage: '',
     mypageUser: {},
+    commentList: []
   },
   getters:{
     getuserInfo(state) {
@@ -16,6 +17,9 @@ export default {
     },
     getMypageUser(state) {
       return state.mypageUser
+    },
+    getCommentList(state) {
+      return state.commentList
     }
   },
   mutations: {
@@ -24,6 +28,9 @@ export default {
     },
     mypageUser(state, data){
       state.mypageUser = data;
+    },
+    commentList(state, data){
+      state.commentList = data;
     }
   },
   actions: {
@@ -70,6 +77,14 @@ export default {
         .get(path)
         .then(response => {
           commit('mypageUser', response.data);
+        })
+        .catch(error => console.log(error.message));
+    },
+    commentList: ({commit}, path) => {
+      axios
+        .get(path)
+        .then(response => {
+          commit('commentList', response.data);
         })
         .catch(error => console.log(error.message));
     }

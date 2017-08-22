@@ -44,13 +44,17 @@ export default {
       document.getElementsByTagName("body")[0].style.overflow = "";
     },
     saveComment(e){
-      // this.$http.post('https://plot-b2239.firebaseio.com/user/comments.json', {
-      //             "id": this.index,
-      //             "comment": this.comment
-      //           }).then(response => {
-      //             window.alert('전시후기가 등록되었습니다.')
-      //             console.log(response.data);
-      //           })
+      this.$http.get('https://plot-b2239.firebaseio.com/user/comments.json')
+                .then(response => {
+                  response.data.push({"id": this.index,
+                                      "comment": this.comment});
+                  this.$http.put('https://plot-b2239.firebaseio.com/user/comments.json', response.data)
+                            .then(response => {
+                              console.log(response.data);
+                              this.$store.commit('commentList', response.data);
+                            window.alert('전시후기가 등록되었습니다.')
+                            })
+                })
       this.closeModal();
     }
   }
@@ -123,10 +127,10 @@ export default {
     position: absolute
     bottom: leading(1)
     right: leading(1)
-    background: #ffcd1a
+    background: #5d5df6
     padding: leading(1)/2
     border: none
     border-radius: 5px
-    color: #666
+    color: #fff
     font: bold 1.4rem "Noto Sans kr", sans-serif
 </style>
