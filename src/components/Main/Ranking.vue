@@ -7,8 +7,8 @@
         실시간 전시 랭킹
       </h2>
       <ranking-item>
-        <ul tag="ul" class="ranking-list">
-          <li :key="index,data" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1}" @mouseleave.prevent="showCurrent()">
+        <ul tag="ul" class="ranking-list" :class="{'is-hover': hover}">
+          <li :key="index,data" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1} " @mouseleave.self="showCurrent" @mouseenter.self="showRanking" >
             <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" @click="nextItem" >
               {{++index+'.'+' '+data.title}}
             </router-link>
@@ -22,7 +22,7 @@
 import RankingItem from './RankingItem'
 export default {
   mounted(){
-    this.showCurrent();
+    this.showCurrent()
   },
   components: {
     RankingItem
@@ -30,8 +30,8 @@ export default {
   data(){
     return {
       active_index :  true,
-      // item: null
-      // items : this.$children
+      hover: false
+      
       
     }  
   },
@@ -44,30 +44,31 @@ export default {
   },
   methods: {
     nextItem(index) {
-    
       let active_index = this.index
-      
       if( this.active_index++ >= this.rankingList.length-1) {
         this.active_index = 0;
       }
-      // console.log('INDEX:',this.rankingList.length)
-      // console.log('ACTIVE_INDEX:',this.active_index)
-      
-      // console.log('nextitem')
     },
     showCurrent(){
-      setInterval(this.nextItem,2000);
-      
-      
+      let current_list = setInterval(this.nextItem,2000);
+      if(this.hover){
+        clearInterval(current_list)
+        console.log(this.hover)
+         this.hover = false;
+      }else{
+        setInterval(this.nextItem,2000);
+        
+      }
+      // setInterval(function(){
+      //   if(this.hover){
+      //     let current_list = setInterval(this.nextItem,2000);
+      //     clearInterval(current_list)
+      //     this.hover = false
+      //   }},2000)
     },
     showRanking(){
-      // let stop = setInterval(this.nextItem,2000);
-      // console.log('STOP:',stop)
-      // clearInterval(stop)
-      let ul = document.querySelector('.ranking-list');
-      let li = ul.querySelectorAll('li')
-      console.log(ul)
-      console.log(li)
+      console.log(this.hover)
+      this.hover = true;
     }
   }
 }
@@ -86,6 +87,8 @@ export default {
     &:hover .ranking-list
       height: auto
       position: static
+      
+      
 
   .ranking-heading
     font: bold 2rem "Noto Sans kr", sans-serif
