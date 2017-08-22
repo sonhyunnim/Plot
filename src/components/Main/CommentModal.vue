@@ -12,10 +12,10 @@
           <div class="display-poster">
             <img :src="displayPoster">
           </div>
-          <textarea class="display-comment" placeholder="이 전시에 대한 생각을 자유롭게 적어주세요"></textarea>
+          <textarea v-model.lazy="comment" class="display-comment" placeholder="이 전시에 대한 생각을 자유롭게 적어주세요"></textarea>
         </div>
         <div class="comment-footer">
-          <button class="save-comment">후기 등록</button>
+          <button class="save-comment" @click="saveComment($event)">후기 등록</button>
         </div>
       </div>
     </div>
@@ -26,22 +26,32 @@
 export default {
   data() {
     return {
+      comment: '',
+      index: this.$store.getters.getCommentModal
     }
   },
   computed:{
     displayHeading: function () {
-      let index = this.$store.getters.getCommentModal;
-      return this.$store.getters.getList[index].title;
+      return this.$store.getters.getList[this.index].title;
     },
     displayPoster: function () {
-      let index = this.$store.getters.getCommentModal;
-      return this.$store.getters.getList[index].poster_img;
+      return this.$store.getters.getList[this.index].poster_img;
     },
   },
   methods: {
     closeModal(){
       this.$store.commit('setCommentModal', false);
       document.getElementsByTagName("body")[0].style.overflow = "";
+    },
+    saveComment(e){
+      // this.$http.post('https://plot-b2239.firebaseio.com/user/comments.json', {
+      //             "id": this.index,
+      //             "comment": this.comment
+      //           }).then(response => {
+      //             window.alert('전시후기가 등록되었습니다.')
+      //             console.log(response.data);
+      //           })
+      this.closeModal();
     }
   }
 }

@@ -33,7 +33,7 @@
                 <i class="fa fa-comment" aria-hidden="true"></i>
                 <a href="#" @click.prevent="openModal(data.id)">코멘트쓰기</a>
               </div>
-              <wish-modal v-if="commentModal===data.id"></wish-modal>
+              <comment-modal v-if="commentModal===data.id"></comment-modal>
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import WishModal from '../Main/WishModal'
+import CommentModal from '../Main/CommentModal'
 export default {
   
   data() {
@@ -51,7 +51,7 @@ export default {
     }
   },
   components: {
-    WishModal
+    CommentModal
   },
   computed: {
     likeList: function () {
