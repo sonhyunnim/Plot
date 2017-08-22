@@ -14,7 +14,12 @@
             <!-- <router-link to="/search" active-class="activated" tag="li" > -->
             <li>
               <form class="search-form">
-                <i class="fa fa-search" @click="gotoSearch"></i>
+                <a 
+                href="#" 
+                class="search-icon"
+                @keyup.enter="submit">
+                  <i class="fa fa-search" @click="gotoSearch"></i>
+                </a>
                 <label for="search" class="search-label">
                   <input
                   id="search"

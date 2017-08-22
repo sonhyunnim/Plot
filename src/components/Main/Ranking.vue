@@ -8,7 +8,7 @@
       </h2>
       <ranking-item>
         <ul tag="ul" class="ranking-list" @mouseover="onMouseOver" @mouseout="showCurrent">
-          <li :key="index,data" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1} " @click="showCurrent" >
+          <li :key="index,data" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index}" ref="test" @click="showCurrent" >
             <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" @click="nextItem" >
               {{++index+'.'+' '+data.title}}
             </router-link>
@@ -29,10 +29,8 @@ export default {
   },
   data(){
     return {
-      active_index :  true,
-      hover: false,
-      intaval_id: null
-      
+      active_index : '',
+      intaval_id: null,
     }  
   },
   computed: {
@@ -43,17 +41,19 @@ export default {
     
   },
   methods: {
-    nextItem(index) {
-      let active_index = this.index
-      if( ++this.active_index >= this.rankingList.length) {
+    nextItem() {
+      if( this.active_index++ >= this.rankingList.length) {
         this.active_index = 0;
       }
     },
     showCurrent(){
-      this.intaval_id = setInterval(this.nextItem,2000);
+      this.intaval_id = setInterval(this.nextItem, 2000);
     },
     onMouseOver(){
+      this.active_index = '';
       clearInterval(this.intaval_id);
+      //console.log(this.active_index);
+      
     }
   }
 }
