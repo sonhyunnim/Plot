@@ -7,8 +7,8 @@
         실시간 전시 랭킹
       </h2>
       <ranking-item>
-        <ul tag="ul" class="ranking-list" :class="{'is-hover': hover}">
-          <li :key="index,data" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1} " @mouseleave.self="showCurrent" @mouseenter.self="showRanking" >
+        <ul tag="ul" class="ranking-list" @mouseover="onMouseOver" @mouseout="showCurrent">
+          <li :key="index,data" v-for="(data, index) in rankingList" :class="{'is-active':active_index === index-1} " @click="showCurrent" >
             <router-link :to="{ name: 'detail', params: { Id: data.id }}" tag="a" class="detail-link" @click="nextItem" >
               {{++index+'.'+' '+data.title}}
             </router-link>
@@ -30,8 +30,8 @@ export default {
   data(){
     return {
       active_index :  true,
-      hover: false
-      
+      hover: false,
+      intaval_id: null
       
     }  
   },
@@ -45,30 +45,15 @@ export default {
   methods: {
     nextItem(index) {
       let active_index = this.index
-      if( this.active_index++ >= this.rankingList.length-1) {
+      if( ++this.active_index >= this.rankingList.length) {
         this.active_index = 0;
       }
     },
     showCurrent(){
-      let current_list = setInterval(this.nextItem,2000);
-      if(this.hover){
-        clearInterval(current_list)
-        console.log(this.hover)
-         this.hover = false;
-      }else{
-        setInterval(this.nextItem,2000);
-        
-      }
-      // setInterval(function(){
-      //   if(this.hover){
-      //     let current_list = setInterval(this.nextItem,2000);
-      //     clearInterval(current_list)
-      //     this.hover = false
-      //   }},2000)
+      this.intaval_id = setInterval(this.nextItem,2000);
     },
-    showRanking(){
-      console.log(this.hover)
-      this.hover = true;
+    onMouseOver(){
+      clearInterval(this.intaval_id);
     }
   }
 }
