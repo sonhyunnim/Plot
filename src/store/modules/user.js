@@ -4,7 +4,7 @@ import store from '../index'
 export default {
   state: {
     userInfo: {},
-    errorMessage: '',
+    
     mypageUser: {},
     commentList: []
   },
@@ -61,17 +61,6 @@ export default {
         })
   
       },
-    //페이스북 로그인
-    fbLogin:  ({commit},userInfo) => {
-      console.log(userInfo);
-      axios
-        .get(path)
-        .then(response => {
-          commit('getUserList', response.data);
-          console.log(respose.data);
-        })
-        .catch(error => console.log(error.message));
-    },
     mypageUser: ({commit}, path) => {
       axios
         .get(path)

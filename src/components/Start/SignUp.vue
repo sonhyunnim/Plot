@@ -8,7 +8,7 @@
           class="input-name" 
           ref="username"
           type="text" 
-          placeholder="이름(홍길동)" 
+          placeholder="이름을 입력해 주세요" 
           v-model="user_input.username" 
           required
           autofocus>
@@ -23,7 +23,7 @@
         placeholder="이메일(example@gmail.com)"
         v-model="user_input.email" 
         required>
-        <p class="error">{{ email_error_msg }}</p>
+        <p class="error">{{ email_error_msg  }}</p>
         
 
         <label class="signup-pw"></label>
@@ -31,8 +31,7 @@
         class="input-pw" 
         type="password" 
         ref="password"
-        placeholder="비밀번호(6자이상)" 
-        minlength="6" maxlength ="20" 
+        placeholder="비밀번호(대소문자, 숫자 포함 8글자 이상)" 
         v-model="user_input.password" 
         required>
         <p class="error">{{ pw_error_msg }}</p>
@@ -51,8 +50,7 @@
         @keyup.enter="agree($event)" 
         :class="{ agreement : agreement }">
         <label class="signup-agreement-label" for="signup-agreement" ></label>
-        <a class="signup-agreement-link" href="#">플롯 서비스 이용약관</a>
-        <span>에 동의합니다.</span>
+        <span>플롯 서비스 이용약관에 동의합니다.</span>
       </div>
       <!--개인정보 수집 이용에 관한 동의 요구-->
       <div class="signup-agreememt-item">
@@ -64,17 +62,15 @@
         @keyup.enter="agree($event)" 
         :class="{ agreement : agreement }">
         <label class="signup-agreement-label" for="signup-agreement" ></label>
-        <a class="signup-agreement-link" href="#">개인정보 수집 이용</a>
-        <span>에 동의합니다.</span>
+        <span>개인정보 수집 이용에 동의합니다.</span>
       </div>
-      <p class="error-term">{{ term_error_msg }}</p>
+      <p class="error-term">{{  term_error_msg }}</p>
     </div>
     
     <div class="signup-button-wrapper">
       <button 
       class="signup-link" 
       type="submit"
-      
       @click="signUp">가입하기</button>
       <!-- <a href class="signup-link" @click.prevent="termAll" v-else>가입하기</a>  -->
       <a href class="signin-link" @click.prevent="signinLink">로그인</a>
@@ -86,6 +82,7 @@
   
 <script>
 import FBActions from '../../utils/FBActions.js';
+let passwordRegexp = /^[A-Za-z0-9]{8,20}$/;
 export default {
   data() {
       return {
@@ -106,6 +103,13 @@ export default {
       }
     },
   computed: {
+    validatePassword() {
+      if(passwordRegexp.test(this.user_input.password)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     signupInfo: function () {
       return this.$store.getters.getuserInfo
     },
@@ -120,7 +124,7 @@ export default {
     },
     agree(e) {
       let target = e.target;
-      console.log(target);
+      // console.log(target);
       if(!target.classList.contains('agreement')) {
         target.setAttribute('checked', true);
         target.classList.add('agreement');
@@ -136,9 +140,13 @@ export default {
       this.$router.push({path: '/signup'})
     },
     signUp() {
-        // console.log(this.user_input);
+        // if(!this.validatePassword){
+        //   console.log('passwordValidate',this.validatePassword)
+        //     this.pw_error_msg = '잘못된 형식의 비밀번호입니다.';
+        //   return 
+        // }   
+
         
-    
         let url = this.$store.state.url + '/api/member/signup/';
         this.$http.post(url, {
             username: this.user_input.username,
@@ -146,8 +154,23 @@ export default {
             nickname: this.user_input.username,
             password: this.user_input.password,
             password2: this.user_input.password
+            
         })
         .then(response => {
+          let termUse = document.getElementById('signup-service-agreememt'),
+               termInfo = document.getElementById('signup-privacy-agreememt')
+
+            if(!this.validatePassword){
+              console.log('validatePassword',this.validatePassword)
+               this.pw_error_msg = '잘못된 형식의 비밀번호입니다.';
+               return
+            }   
+            if(!termUse.classList.contains('agreement') || !termInfo.classList.contains('agreement')){
+              this.term_error_msg = '약관에 동의하여 주세요'
+              this.$refs.agreement.focus();
+              return
+            }
+            
           if(response.status === 201) {
             console.log(response);
             alert('회원가입이 성공적으로 완료되었습니다');
@@ -165,7 +188,7 @@ export default {
                 }
               }else{
                 this.id_error_msg = ''
-                // refs.username.focus();
+                
               }
 
             if( get_error.email ){
@@ -175,23 +198,33 @@ export default {
                 }else if( get_error.email[0] === 'Enter a valid email address.' ){
                   this.email_error_msg = '유효한 이메일 주소가 아닙니다.'  
                   refs.email.focus();
-                }else{
+                }else if(get_error.email[0] === 'user with this email address already exists.'){
                   this.email_error_msg = '이미 가입된 이메일 주소 입니다.'
                   refs.email.focus();
+                  this.pw_error_msg = ''
+                  
                 }
             }else{
               this.email_error_msg = ''
               refs.email.focus();
             }
             if( get_error.password ){
-                if( get_error.password[0] === 'This field may not be blank.'){
-                  this.pw_error_msg = '비밀번호를 입력해주세요'
-                  refs.password.focus();
-                }
+              if( get_error.password[0] === 'This field may not be blank.'){
+                this.pw_error_msg = '비밀번호를 입력해주세요'
+                refs.password.focus();
+              }
+                
             }else{
-              this.pw_error_msg = ''
-              refs.password.focus();
+              if(!this.validatePasswords ){
+               this.pw_error_msg = '잘못된 형식의 비밀번호입니다.';
+               return
+            }else{   
+                this.pw_error_msg = ''
+                refs.password.focus();
+              } 
             }
+            
+            
             let termUse = document.getElementById('signup-service-agreememt'),
                termInfo = document.getElementById('signup-privacy-agreememt')
             if(!termUse.classList.contains('agreement') || !termInfo.classList.contains('agreement')){
@@ -199,6 +232,13 @@ export default {
               this.$refs.agreement.focus();
               return
             }
+            // if(!this.validatePassword){
+            //    this.pw_error_msg = '잘못된 형식의 비밀번호입니다.';
+            //    return true
+            // }   
+            
+            
+            
             
         });
       }

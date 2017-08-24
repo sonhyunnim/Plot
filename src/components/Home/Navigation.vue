@@ -16,18 +16,24 @@
                 <a 
                 href="#" 
                 class="search-icon"
-                @keyup.enter="submit">
-                  <i class="fa fa-search" @click="gotoSearch"></i>
+                @keyup.enter="openSearch">
+                  <i 
+                  class="fa fa-search" @click="openSearch"></i>
                 </a>
                 <label for="search" class="search-label">
                   <input
                   id="search"
                   type="text"
-                  placeholder="Search"
+                  placeholder="어떤 전시를 찾으시나요?"
                   class= "search-input"
                   :class= "{ active: isActive }"
+                  v-model="keyword" 
+                  @input="search({keyword},$event)"
+                  :value="search"
                   @blur="closeSearch"
-                  @focus.self="openSearch">
+                  @keyup.enter="gotoSearch"
+                  autofocus>
+
                 </label>
               </form>
             </li>
@@ -46,14 +52,16 @@ export default {
   data() {
     return {
       isActive: false,
+      keyword: ''
     }
   },
   methods: {
-    gotoSearch(e){
+    openSearch(e){
       this.isActive === false ? this.isActive = true : this.isActive = false;
       
+      
     },
-    openSearch(){
+    gotoSearch(){
       this.$router.push( {path: '/search'} )
     },
     closeSearch(){
@@ -63,6 +71,11 @@ export default {
     scrollCategory(id){
       let el = document.getElementById(id);
       el.scrollIntoView(true);
+    },
+    search(keyword) {
+      this.keyword = event.target.value;
+      let search_value = this.keyword.trim()
+      this.$store.commit('searchList', search_value);
     }
   }
   
