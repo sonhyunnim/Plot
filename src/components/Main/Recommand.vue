@@ -97,7 +97,6 @@ export default {
     border: none
     opacity: 0.5
     background-color: #1e0b65
-    // color: #fff
     transition: opacity 0.4s
     transform: translateY(-50%)
     &.is_prev
