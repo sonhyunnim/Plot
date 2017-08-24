@@ -1,6 +1,5 @@
-<!--Search -->
 <template>
-    <div id="navigation" :style="isScroll" :class= "{ active: isActive }">
+    <div id="navigation">
       <div class="header container">
         <router-link to="/home" active-class="activated" tag="a">
           <div class="logo">
@@ -49,31 +48,12 @@
     </div>
 </template>
 <script>
-
-  
-// import Search from './Search'
 export default {
   data() {
     return {
       isActive: false,
-      isScroll: '',
-      //검색 키워드
       keyword: ''
     }
-  },
-  mounted(){
-      let navHeight = document.getElementById('navigation').scrollHeight;
-      window.onscroll = () => { 
-        if(!this.isScroll && (window.scrollY > navHeight)){
-          this.isScroll = {
-                          background: '#fff',
-                          boxShadow: 'rgba(0,0,0,0.2) 0 1px 3px'
-                          }
-        }
-        else if(this.isScroll && (window.scrollY < navHeight)){
-          this.isScroll = '';
-        }
-      }
   },
   methods: {
     openSearch(e){

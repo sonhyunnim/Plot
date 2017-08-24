@@ -37,7 +37,7 @@
         <p class="error">{{ pw_error_msg }}</p>
         
       </div> 
-  </form>
+    </form>
 
     <div class="signup-agreememt">
       <!--플롯 사이트 서비스에 관한 동의 요구 -->
@@ -312,6 +312,4 @@ export default {
   .fa-facebook-official
     padding-right: 1rem  
     font-size: 2rem 
-      
-    
 </style>

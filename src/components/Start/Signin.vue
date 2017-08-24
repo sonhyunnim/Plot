@@ -1,28 +1,27 @@
 <template>
-  <div class="signin">
-    <h2>로그인</h2>
-    <form action="" class="login-page-form">
-      <div class="signin-input-group">
-        <label class="signin-email"></label>
-        <input class="input-email" type="email" placeholder="이메일(example@gmail.com)" v-model="email" required autofocus>
-        
-        <label class="signin-pw"></label>
-        <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" v-model="password" required autocomplete="off">
-        
-      </div>
-    </form>  
-
-      <div class="signin-button-wrapper">
-        <button 
-        class="signin-link" 
-        type="submit"
-        @click="signIn">로그인 하기</button>
-        <!-- <a href class="signin-link" @click.prevent="signinLink">로그인 하기</a> -->
-        <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
-        <a href class="facebook-link" @click.prevent="checkLoginState"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
-      </div>
-    
-  </div>
+    <div class="signin">
+      <h2>로그인</h2>
+      <form action="" class="login-page-form">
+        <div class="signin-input-group">
+          <label class="signin-email"></label>
+          <input class="input-email" type="email" placeholder="이메일(example@gmail.com)" v-model="email" required autofocus>
+          
+          <label class="signin-pw"></label>
+          <input class="input-pw" type="password" placeholder="비밀번호(6자이상)" minlength="6" maxlength ="20" v-model="password" required autocomplete="off">
+          
+        </div>
+      </form>  
+  
+        <div class="signin-button-wrapper">
+          <button 
+          class="signin-link" 
+          type="submit"
+          @click="signIn">로그인 하기</button>
+          <!-- <a href class="signin-link" @click.prevent="signinLink">로그인 하기</a> -->
+          <a href class="signup-link" @click.prevent="signupLink">회원가입 하기</a> 
+          <a href class="facebook-link" @click.prevent="checkLoginState"><span class="fa fa-facebook-official" aria-hidden="true"></span><span class="facebook-login">페이스북으로 로그인</span></a>
+        </div>
+    </div>
 </template>
   
 <script>
@@ -110,18 +109,7 @@ methods: {
   .fa-facebook-official
     padding-right: 1rem  
     font-size: 2rem 
-      
-    
     
 
-
-
-  
-
-
-
-
-  
-  
 
 </style>

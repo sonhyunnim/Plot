@@ -7,7 +7,7 @@
         <a href class="signin-link" @click.prevent="signinLink">로그인</a>
         <a href class="signup-link" @click.prevent="signupLink">회원가입</a> 
       </div>
-      <router-view></router-view>
+      <!-- <router-view></router-view> -->
     </div>
 </template>
   
@@ -32,7 +32,8 @@ export default {
 <style lang="sass" scoped>
   @import "~config"
   
-  
+  .start
+    overflow: hidden
   .logo
     width: 230px
     padding-top: leading(2)
@@ -62,7 +63,7 @@ export default {
     background-color: rgb(73, 105, 240)
 
   .fa-facebook
-    padding-right: 1rem  
+    padding-right: 1rem
     font-size: 2rem
   
   .fa-facebook-official
