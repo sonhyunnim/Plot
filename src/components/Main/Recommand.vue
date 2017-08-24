@@ -12,10 +12,10 @@
         </div>
         <div class="arrow_btn">
           <button class="slide_btn is_prev" type="button" @click="preve">
-            <i class="fa fa-chevron-left" aria-hidden="true"alt="prev item"></i>
+            <img src='https:icon.now.sh/chevron/left/fff/32' alt='chevron icon' />
           </button>
           <button class="slide_btn is_next" type="button" @click="next">
-            <i class="fa fa-chevron-right" aria-hidden="true"alt="next item"></i>
+            <img src='https:icon.now.sh/chevron/right/fff/32' alt='chevron icon' />
           </button>
         </div>
   </div>
@@ -85,7 +85,7 @@ export default {
     float: left
   .slides-inner
     height: 230px
-    margin-top: span(0.4)
+    margin-top: span(0.35)
 
   button
     width: 3.5rem
@@ -95,9 +95,9 @@ export default {
     position: absolute
     bottom: 40%
     border: none
-    opacity: 1
+    opacity: 0.5
     background-color: #1e0b65
-    color: #fff
+    // color: #fff
     transition: opacity 0.4s
     transform: translateY(-50%)
     &.is_prev
