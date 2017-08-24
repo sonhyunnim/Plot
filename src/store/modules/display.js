@@ -6,7 +6,8 @@ export default {
   state: {
     displayList : [],
     filterList : [],
-    userLikeList: []
+    userLikeList: [],
+    searchList: []
   },
 
   getters: {
@@ -18,6 +19,10 @@ export default {
     },
     getLikeList: state => {
       return state.userLikeList;
+    },
+    //검색 결과 리스트  
+    getSearchList: state => {
+      return state.searchList;
     }
   },
 
@@ -25,6 +30,9 @@ export default {
     initList: (state, payload) => {
       state.displayList = payload;
       state.filterList = payload;
+      
+      
+      
     },
     // addList: (state, payload) => {
     //   state.displayList.push(payload);
@@ -48,6 +56,7 @@ export default {
       });
       state.filterList = filteredList;
     },
+    //좋아요
     likeList: (state, payload) => {
       let displayList = JSON.parse(JSON.stringify(state.displayList));
       let likedList = displayList.filter(item => {
@@ -58,8 +67,36 @@ export default {
         })
       })
       state.userLikeList = likedList;
+    },
+    //검색 결과 리스트
+    searchList:(state, payload) => {
+      //검색 키워드
+      let search_value = payload;
+      // console.log('SEARCH_VALUE:',search_value)
+      //검색값과 비교할 전시 정보 데이터  
+      let displayList = JSON.parse(JSON.stringify(state.displayList));
+      // console.log('DISPLAYLIST:', displayList)
+      //전시 디테일 정보중 일치하는 키워드 가 있는지를 비교하여 필터링.
+      
+        let searched_list = [];
+        displayList.filter(function(member){
+            Object.values(member).some(function(value){
+                if(typeof value === 'string'){
+                  if(value.includes(search_value)){
+                    searched_list.push(member);
+                  }
+                }
+              })
+            }); 
+        //중복제서
+        searched_list = Array.from(new Set(searched_list));
+      
+      //검색 키워드와 일치하는 전시리스트 저장.
+      state.searchList = searched_list;
+      sessionStorage.setItem('result', JSON.stringify(searched_list));
     }
   },
+  
 
   actions: {
     initList: ({commit}, path) => {
