@@ -1,25 +1,29 @@
 <template>
-  <div class="modal">
-    <div class="modal-background" @click.self="closeModal">
-      <div class="modal-content">
-        <div class="comment-header">
-          <h2 class="display-heading">{{displayHeading}}</h2>
-          <button class="modal-close" @click="closeModal">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </button>
-        </div>
-        <div class="comment-body">
-          <div class="display-poster">
-            <img :src="displayPoster">
+  <transition transition appear
+      name="scale"
+      mode="out-in">
+    <div class="modal">
+      <div class="modal-background" @click.self="closeModal">
+        <div class="modal-content">
+          <div class="comment-header">
+            <h2 class="display-heading">{{displayHeading}}</h2>
+            <button class="modal-close" @click="closeModal">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
           </div>
-          <textarea v-model.lazy="comment" class="display-comment" placeholder="이 전시에 대한 생각을 자유롭게 적어주세요"></textarea>
-        </div>
-        <div class="comment-footer">
-          <button class="save-comment" @click="saveComment($event)">후기 등록</button>
+          <div class="comment-body">
+            <div class="display-poster">
+              <img :src="displayPoster">
+            </div>
+            <textarea ref="comment" v-model.lazy="comment" class="display-comment" placeholder="이 전시에 대한 생각을 자유롭게 적어주세요"></textarea>
+          </div>
+          <div class="comment-footer">
+            <button class="save-comment" @click="saveComment($event)">후기 등록</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
   
 <script>
@@ -44,6 +48,11 @@ export default {
       document.getElementsByTagName("body")[0].style.overflow = "";
     },
     saveComment(e){
+      if (!this.comment) {
+        window.alert('전시 후기를 입력해주세요.');
+        this.$refs.comment.focus();
+        return true
+      }
       this.$http.get('https://plot-b2239.firebaseio.com/user/comments.json')
                 .then(response => {
                   response.data.push({"id": this.index,
@@ -133,4 +142,28 @@ export default {
     border-radius: 5px
     color: #fff
     font: bold 1.4rem "Noto Sans kr", sans-serif
+
+  .scale-enter
+    opacity: 0
+    // transform: scale(0)
+  .scale-enter-active
+    animation: scale-in 0.45s ease-in forwards
+  .scale-leave-active
+    animation: scale-out 0.4s ease-in forwards
+  
+  @keyframes scale-in
+    0%
+      transform: scale(0)
+    70%
+      transform: scale(1.2)
+    100%
+      transform: scale(1)
+  @keyframes scale-out
+    0%
+      transform: scale(1)
+    70%
+      transform: scale(1.2)
+    100%
+      transform: scale(0)
+
 </style>
